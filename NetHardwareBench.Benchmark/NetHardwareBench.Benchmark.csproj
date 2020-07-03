@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NetHardwareBench.Factory\NetHardwareBench.Factory.csproj" />
+    <ProjectReference Include="..\NetHardwareBench.Model\NetHardwareBench.Model.csproj" />
+    <ProjectReference Include="..\NetHardwareBench.Module.CPU\NetHardwareBench.Module.CPU.csproj" />
+    <ProjectReference Include="..\NetHardwareBench.Module.GPU\NetHardwareBench.Module.GPU.csproj" />
+    <ProjectReference Include="..\NetHardwareBench.Module.Network\NetHardwareBench.Module.Network.csproj" />
+    <ProjectReference Include="..\NetHardwareBench.Module.RAM\NetHardwareBench.Module.RAM.csproj" />
+    <ProjectReference Include="..\NetHardwareBench.Module.RemoteStorage\NetHardwareBench.Module.RemoteStorage.csproj" />
+    <ProjectReference Include="..\NetHardwareBench.Module.Storage\NetHardwareBench.Module.LocalStorage.csproj" />
+    <ProjectReference Include="..\NetHardwareBench.Util\NetHardwareBench.Util.csproj" />
+  </ItemGroup>
+
+</Project>

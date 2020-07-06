@@ -1,49 +1,51 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.960
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetHardwareBench.Factory", "NetHardwareBench.Factory\NetHardwareBench.Factory.csproj", "{DB720224-3F15-4738-943B-9BDBD4A5ABDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetHardwareBench.Factory", "NetHardwareBench.Factory\NetHardwareBench.Factory.csproj", "{DB720224-3F15-4738-943B-9BDBD4A5ABDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetHardwareBench.Model", "NetHardwareBench.Model\NetHardwareBench.Model.csproj", "{9B878F1B-6878-4D43-AD98-58F29CF3879B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetHardwareBench.Model", "NetHardwareBench.Model\NetHardwareBench.Model.csproj", "{9B878F1B-6878-4D43-AD98-58F29CF3879B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetHardwareBench.Module.CPU", "NetHardwareBench.Module.CPU\NetHardwareBench.Module.CPU.csproj", "{72879B68-030B-4D3C-9C48-094548439FE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetHardwareBench.Module.CPU", "NetHardwareBench.Module.CPU\NetHardwareBench.Module.CPU.csproj", "{72879B68-030B-4D3C-9C48-094548439FE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetHardwareBench.Module.GPU", "NetHardwareBench.Module.GPU\NetHardwareBench.Module.GPU.csproj", "{3C697FF4-8618-4FC8-9225-153F30DADF78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetHardwareBench.Module.GPU", "NetHardwareBench.Module.GPU\NetHardwareBench.Module.GPU.csproj", "{3C697FF4-8618-4FC8-9225-153F30DADF78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetHardwareBench.Module.LocalStorage", "NetHardwareBench.Module.Storage\NetHardwareBench.Module.LocalStorage.csproj", "{A6D9DE80-BCAB-4DB8-B0B7-46BD925A1F2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetHardwareBench.Module.LocalStorage", "NetHardwareBench.Module.Storage\NetHardwareBench.Module.LocalStorage.csproj", "{A6D9DE80-BCAB-4DB8-B0B7-46BD925A1F2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetHardwareBench.Module.Network", "NetHardwareBench.Module.Network\NetHardwareBench.Module.Network.csproj", "{73A03080-96C9-4526-AA86-9966A755EBC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetHardwareBench.Module.Network", "NetHardwareBench.Module.Network\NetHardwareBench.Module.Network.csproj", "{73A03080-96C9-4526-AA86-9966A755EBC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetHardwareBench.Module.RAM", "NetHardwareBench.Module.RAM\NetHardwareBench.Module.RAM.csproj", "{27622D43-B4F2-426D-92A8-F1EF1ABFA992}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetHardwareBench.Module.RAM", "NetHardwareBench.Module.RAM\NetHardwareBench.Module.RAM.csproj", "{27622D43-B4F2-426D-92A8-F1EF1ABFA992}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Benchmark Modules", "Benchmark Modules", "{4C5A3561-2CD0-4610-A54E-88DF8ECDAEED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetHardwareBench.Benchmark", "NetHardwareBench.Benchmark\NetHardwareBench.Benchmark.csproj", "{29A5AC98-EAB1-4A22-816A-A23153F13F6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetHardwareBench.Benchmark", "NetHardwareBench.Benchmark\NetHardwareBench.Benchmark.csproj", "{29A5AC98-EAB1-4A22-816A-A23153F13F6D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Benchmark Core", "Benchmark Core", "{8F6AC582-9DBA-4B8B-9D91-68791C35ED13}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Benchmark Generals", "Benchmark Generals", "{CBAB63F6-95CB-42FE-9E78-54AEFDEEF08C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetHardwareBench.Util", "NetHardwareBench.Util\NetHardwareBench.Util.csproj", "{4680557B-EE11-4745-B44F-0642588195CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetHardwareBench.Util", "NetHardwareBench.Util\NetHardwareBench.Util.csproj", "{4680557B-EE11-4745-B44F-0642588195CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetHardwareBench.Module.RemoteStorage", "NetHardwareBench.Module.RemoteStorage\NetHardwareBench.Module.RemoteStorage.csproj", "{E220B700-FA1D-4D2F-AC25-61DAAFF18F04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetHardwareBench.Module.RemoteStorage", "NetHardwareBench.Module.RemoteStorage\NetHardwareBench.Module.RemoteStorage.csproj", "{E220B700-FA1D-4D2F-AC25-61DAAFF18F04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetHardwareBench.Report", "NetHardwareBench.Report\NetHardwareBench.Report.csproj", "{6EB131D7-6FBA-4447-B4F8-A162A49052C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetHardwareBench.Report", "NetHardwareBench.Report\NetHardwareBench.Report.csproj", "{6EB131D7-6FBA-4447-B4F8-A162A49052C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetHardwareBench.Core.App", "NetHardwareBench.Core.App\NetHardwareBench.Core.App.csproj", "{2F15DAFB-A710-421A-B0F0-B82D5C81A907}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetHardwareBench.Core.App", "NetHardwareBench.Core.App\NetHardwareBench.Core.App.csproj", "{2F15DAFB-A710-421A-B0F0-B82D5C81A907}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetHardwareBench.App", "NetHardwareBench.App\NetHardwareBench.App.csproj", "{77282A9E-201B-4ABD-8A57-07B3221A4BEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetHardwareBench.Module.Database", "NetHardwareBench.Module.Database\NetHardwareBench.Module.Database.csproj", "{E875233F-DB15-41F0-935B-0C9980071699}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetHardwareBench.Module.Database", "NetHardwareBench.Module.Database\NetHardwareBench.Module.Database.csproj", "{E875233F-DB15-41F0-935B-0C9980071699}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetHardwareBench.Module.GPU.Windows", "NetHardwareBench.Module.GPU.Windows\NetHardwareBench.Module.GPU.Windows.csproj", "{60BE62B9-DC49-4135-82C7-0170908460DC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App Generals", "App Generals", "{D61B31E9-9905-4C13-AE82-CCCB53631405}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{D61B31E9-9905-4C13-AE82-CCCB53631405}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetHardwareBench.App.Commons", "NetHardwareBench.App.Commons\NetHardwareBench.App.Commons.csproj", "{40A285AE-CC06-49B1-A7C6-5BAC2406798E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetHardwareBench.App.Commons", "NetHardwareBench.App.Commons\NetHardwareBench.App.Commons.csproj", "{40A285AE-CC06-49B1-A7C6-5BAC2406798E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetHardwareBench.Module.Internet", "NetHardwareBench.Module.Internet\NetHardwareBench.Module.Internet.csproj", "{DFECCFB7-EBDB-4B9C-8D06-4F13D4AC6F1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetHardwareBench.Module.Internet", "NetHardwareBench.Module.Internet\NetHardwareBench.Module.Internet.csproj", "{DFECCFB7-EBDB-4B9C-8D06-4F13D4AC6F1A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{F99FEBA5-B99C-4714-99E5-FB875FFF8DFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -135,8 +137,11 @@ Global
 		{4680557B-EE11-4745-B44F-0642588195CA} = {CBAB63F6-95CB-42FE-9E78-54AEFDEEF08C}
 		{E220B700-FA1D-4D2F-AC25-61DAAFF18F04} = {4C5A3561-2CD0-4610-A54E-88DF8ECDAEED}
 		{6EB131D7-6FBA-4447-B4F8-A162A49052C8} = {CBAB63F6-95CB-42FE-9E78-54AEFDEEF08C}
+		{2F15DAFB-A710-421A-B0F0-B82D5C81A907} = {F99FEBA5-B99C-4714-99E5-FB875FFF8DFF}
+		{77282A9E-201B-4ABD-8A57-07B3221A4BEB} = {F99FEBA5-B99C-4714-99E5-FB875FFF8DFF}
 		{E875233F-DB15-41F0-935B-0C9980071699} = {4C5A3561-2CD0-4610-A54E-88DF8ECDAEED}
 		{60BE62B9-DC49-4135-82C7-0170908460DC} = {4C5A3561-2CD0-4610-A54E-88DF8ECDAEED}
+		{D61B31E9-9905-4C13-AE82-CCCB53631405} = {F99FEBA5-B99C-4714-99E5-FB875FFF8DFF}
 		{40A285AE-CC06-49B1-A7C6-5BAC2406798E} = {D61B31E9-9905-4C13-AE82-CCCB53631405}
 		{DFECCFB7-EBDB-4B9C-8D06-4F13D4AC6F1A} = {4C5A3561-2CD0-4610-A54E-88DF8ECDAEED}
 	EndGlobalSection

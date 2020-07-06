@@ -15,6 +15,7 @@ namespace NetHardwareBench.App.Commons
                 WorkDirectory = ""
             });
 
+            BenchmarkCore.OnProgressChanged += BenchmarkCore_OnProgressChanged;
 
             while (true)
             {
@@ -29,6 +30,11 @@ namespace NetHardwareBench.App.Commons
                 Console.ReadKey();
             }
 
+        }
+
+        private static void BenchmarkCore_OnProgressChanged(double progress)
+        {
+            Console.WriteLine("BenchmarkCore_OnProgressChanged: " + progress);
         }
     }
 }

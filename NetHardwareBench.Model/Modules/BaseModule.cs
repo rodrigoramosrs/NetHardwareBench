@@ -8,6 +8,12 @@ namespace NetHardwareBench.Model.Modules
 {
     public abstract class BaseModule : Interfaces.IBenchmarkModule
     {
+        public event Events.LifeCycleEvents.StartedDelegate OnStarted = delegate { };
+        public event Events.LifeCycleEvents.FinishedDelegate OnFinished = delegate { };
+        public event Events.LifeCycleEvents.ExceptionDelegate OnException = delegate { };
+        public event Events.LifeCycleEvents.ProgressChangeDelegate OnProgressChanged = delegate { };
+        public event Events.LifeCycleEvents.ActivityReportDelegate OnActivityReport = delegate { };
+        
         private readonly ConfigurationParameters _ConfigurationParameters;
         public BaseModule(ConfigurationParameters ConfigurationParameters)
         {

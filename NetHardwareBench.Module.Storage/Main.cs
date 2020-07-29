@@ -149,23 +149,26 @@ namespace NetHardwareBench.Module.LocalStorage
 
             foreach (var driver in drivers)
             {
-                if(driver.TotalFreeSpace < fileSize)
+                try
                 {
-                    base.WriteMessage($"CANNOT BENCHMARK LOCAL STORAGE SPEED FOR DRIVER [{driver.Name}] - Not enough space");
-                }
-                else
-                {
-                    try
+                    if (driver.TotalFreeSpace < fileSize)
+                    {
+                        base.WriteMessage($"CANNOT BENCHMARK LOCAL STORAGE SPEED FOR DRIVER [{driver.Name}] - Not enough space");
+                    }
+                    else
                     {
                         var testSuite = new BigTest(driver.Name, fileSize, false);
                         result.AddRange(DoDiskBenchmark(testSuite, driver.Name));
                     }
-                    catch (Exception ex)
-                    {
-                        string message = $"Error while test disk [{driver.Name}]";
-                        base.WriteMessage(message + ex.ToString());
-                    }
+                   
                 }
+                catch (Exception ex)
+                {
+                    string message = $"Error while test disk [{driver.Name}]";
+                    base.WriteMessage(message + ex.ToString());
+                }
+
+                
             }
 
             return result;

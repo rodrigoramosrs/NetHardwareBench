@@ -19,6 +19,11 @@ namespace NetHardwareBench.Model.Modules
         {
             _ConfigurationParameters = ConfigurationParameters;
         }
+
+        public void WriteMessage(string Message = "")
+        {
+            Console.WriteLine(Message);
+        }
         public abstract BenchmarkResult DoBenchmark();
 
         public abstract BenchmarkType GetBenchmarkType();

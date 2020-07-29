@@ -15,13 +15,13 @@ namespace NetHardwareBench.Module.GPU
         public override BenchmarkResult DoBenchmark()
         {
             BenchmarkResult result = new BenchmarkResult();
-            Console.WriteLine("== Starting GPU Benchmark ==\r\n");
+            base.WriteMessage("== Starting GPU Benchmark ==\r\n");
             result.StepsDetails.Add("Starting GPU Benchmark");
 
             result.StartedAt = DateTime.Now;
             
             result.FinishedAt = DateTime.Now;
-            Console.WriteLine("== Finished GPU Benchmark ==\r\n\r\n");
+            base.WriteMessage("== Finished GPU Benchmark ==\r\n\r\n");
             result.StepsDetails.Add("Finished GPU Benchmark");
             return result;
         }

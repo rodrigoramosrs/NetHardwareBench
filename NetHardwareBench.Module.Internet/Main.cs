@@ -21,13 +21,16 @@ namespace NetHardwareBench.Module.Internet
         public override BenchmarkResult DoBenchmark()
         {
             BenchmarkResult result = new BenchmarkResult();
-            Console.WriteLine("== Starting Internet Benchmark ==\r\n");
+            base.WriteMessage("== Starting Internet Benchmark ==\r\n");
             result.StepsDetails.Add("Starting Internet Benchmark");
-
+            base.WriteMessage("");
             result.StartedAt = DateTime.Now;
-            DoInternalBenchmark();
+            result.PartialResults = DoInternalBenchmark();
             result.FinishedAt = DateTime.Now;
-            Console.WriteLine("== Finished Internet Benchmark ==\r\n\r\n");
+
+            result.Score = result.PartialResults.Sum(x => x.Score) / result.PartialResults.Count;
+
+            base.WriteMessage("== Finished Internet Benchmark ==\r\n\r\n");
             result.StepsDetails.Add("Finished Internet Benchmark");
             return result;
         }
@@ -37,36 +40,54 @@ namespace NetHardwareBench.Module.Internet
         private SpeedTestClient client;
         private Settings settings;
 
-        void DoInternalBenchmark()
+        List<BenchmarkPartialResult> DoInternalBenchmark()
         {
-            Console.WriteLine("Getting speedtest.net settings and server list...");
+            var result = new List<BenchmarkPartialResult>();
+            base.WriteMessage("Getting speedtest.net settings and server list...");
             client = new SpeedTestClient();
             settings = client.GetSettings();
 
             var servers = SelectServers();
             var bestServer = SelectBestServer(servers);
 
-            Console.WriteLine("Testing speed...");
+            base.WriteMessage("Testing speed...");
             var downloadSpeed = client.TestDownloadSpeed(bestServer, settings.Download.ThreadsPerUrl);
             PrintSpeed("Download", downloadSpeed);
             var uploadSpeed = client.TestUploadSpeed(bestServer, settings.Upload.ThreadsPerUrl);
             PrintSpeed("Upload", uploadSpeed);
+
+            result.Add(new BenchmarkPartialResult() 
+            {
+                Description = "UPLOAD",
+                ResultType = BenchmarkResultType.UPLOAD_SPEED,
+                Score = Math.Round(uploadSpeed / 1024,2),
+                MetricScale = MetricScaleType.MEGABYTE
+            } );
+            result.Add(new BenchmarkPartialResult()
+            {
+                Description = "DOWNLOAD",
+                ResultType = BenchmarkResultType.DOWNLOAD_SPEED,
+                Score = Math.Round(downloadSpeed / 1024,2),
+                MetricScale = MetricScaleType.MEGABYTE
+            });
+            //result.Score = Math.Round((downloadSpeed + uploadSpeed) / 1024, 2);
+            return result;
         }
 
         private Server SelectBestServer(IEnumerable<Server> servers)
         {
-            Console.WriteLine();
-            Console.WriteLine("Best server by latency:");
+            base.WriteMessage();
+            base.WriteMessage("Best server by latency:");
             var bestServer = servers.OrderBy(x => x.Latency).First();
             PrintServerDetails(bestServer);
-            Console.WriteLine();
+            base.WriteMessage();
             return bestServer;
         }
 
         private IEnumerable<Server> SelectServers()
         {
-            Console.WriteLine();
-            Console.WriteLine("Selecting best server by distance...");
+            base.WriteMessage();
+            base.WriteMessage("Selecting best server by distance...");
             var servers = settings.Servers.Take(10).ToList();
 
             foreach (var server in servers)
@@ -79,19 +100,19 @@ namespace NetHardwareBench.Module.Internet
 
         private void PrintServerDetails(Server server)
         {
-            Console.WriteLine("Hosted by {0} ({1}/{2}), distance: {3}km, latency: {4}ms", server.Sponsor, server.Name,
-                server.Country, (int)server.Distance / 1000, server.Latency);
+            base.WriteMessage(string.Format("Hosted by {0} ({1}/{2}), distance: {3}km, latency: {4}ms", server.Sponsor, server.Name,
+                server.Country, (int)server.Distance / 1000, server.Latency));
         }
 
         private void PrintSpeed(string type, double speed)
         {
             if (speed > 1024)
             {
-                Console.WriteLine("{0} speed: {1} Mbps", type, Math.Round(speed / 1024, 2));
+                base.WriteMessage(string.Format("{0} speed: {1} Mbps", type, Math.Round(speed / 1024, 2)));
             }
             else
             {
-                Console.WriteLine("{0} speed: {1} Kbps", type, Math.Round(speed, 2));
+                base.WriteMessage(string.Format("{0} speed: {1} Kbps", type, Math.Round(speed, 2)));
             }
         }
 

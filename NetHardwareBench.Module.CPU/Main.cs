@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using NetHardwareBench.Model;
 using NetHardwareBench.Model.Modules.Parameters;
 using NetHardwareBench.Model.Modules.Types;
@@ -19,38 +20,55 @@ namespace NetHardwareBench.Module.CPU
         public override BenchmarkResult DoBenchmark()
         {
             BenchmarkResult result = new BenchmarkResult();
-            Console.WriteLine("== Starting CPU Benchmark ==\r\n");
+            base.WriteMessage("== Starting CPU Benchmark ==\r\n");
             result.StepsDetails.Add("Starting CPU Benchmark");
 
             result.StartedAt = DateTime.Now;
             //DoInternalBenchmark();
-            StartBigBenchmark();
-            DoInternalBenchmark();
+            var partialBigBenchmark = StartBigBenchmark();
+            var partialInternalBenchmark = DoInternalBenchmark();
             result.FinishedAt = DateTime.Now;
-            Console.WriteLine("== Finished CPU Benchmark ==\r\n\r\n");
+
+            result.PartialResults.AddRange(partialBigBenchmark);
+            result.PartialResults.AddRange(partialInternalBenchmark);
+            result.Score = Math.Round(result.PartialResults.Sum(x => x.Score) / result.PartialResults.Count, 2);
+            
+            base.WriteMessage("== Finished CPU Benchmark ==\r\n\r\n");
             result.StepsDetails.Add("Finished CPU Benchmark");
             return result;
         }
 
-        private void DoInternalBenchmark()
+        List<BenchmarkPartialResult> DoInternalBenchmark()
         {
             // FindPrimeNumber(99999);
+            List<BenchmarkPartialResult> result = new List<BenchmarkPartialResult>();
             Stopwatch Cronometro = new Stopwatch();
             Cronometro.Start();
-            Console.WriteLine("\r\nCalculating prime number in CPU");
-            Console.WriteLine("==================================");
+            base.WriteMessage("\r\nCalculating prime number in CPU");
+            base.WriteMessage("==================================");
             TimeSpan TempoTotalGasto;
-            int NumeroDeIteracoes = 3;
+            int NumeroDeIteracoes = 5;
             for (int i = 1; i < NumeroDeIteracoes + 1; i++)
             {
                 FindPrimeNumber(299999);
                 var TempoAtual = Cronometro.Elapsed;
-                Console.WriteLine("Attempt " + i + ": " + TempoAtual.ToString());
+                base.WriteMessage("Attempt " + i + ": " + TempoAtual.ToString());
                 TempoTotalGasto += TempoAtual;
+
+                result.Add(new BenchmarkPartialResult()
+                {
+                    Description = $"CPU - CALCULATE PRIME_NUMBER [{i}]",
+                    Score = TempoAtual.TotalSeconds,
+                    MetricScale = MetricScaleType.SECOND,
+                    ResultType = BenchmarkResultType.SPEED_TIME
+                });
+
                 Cronometro.Restart();
             }
-            Console.WriteLine("Prime Number AVG: " + new TimeSpan((TempoTotalGasto.Ticks/ NumeroDeIteracoes)).ToString());
+            var avgTime = new TimeSpan((TempoTotalGasto.Ticks / NumeroDeIteracoes));
+            base.WriteMessage("Prime Number AVG: " + avgTime.ToString());
             Cronometro.Stop();
+            return result;
         }
 
         public long FindPrimeNumber(int n)
@@ -144,7 +162,7 @@ namespace NetHardwareBench.Module.CPU
             bigDoubleList.Add(558721.0);
         }
 
-         double MulBigDouble(int loop)
+         double MulBigDouble(int loop, out TimeSpan timeSpent)
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -164,16 +182,16 @@ namespace NetHardwareBench.Module.CPU
             stopWatch.Stop();
             // Get the elapsed time as a TimeSpan value.
             TimeSpan ts = stopWatch.Elapsed;
-
+            timeSpent = ts;
             // Format and display the TimeSpan value.
             string elapsedTime = String.Format("{0:00}:{1:00}.{2:000}",
                 ts.Minutes, ts.Seconds,
                 ts.Milliseconds);
-            Console.WriteLine("MulBigDouble RunTime:" + elapsedTime);
+            base.WriteMessage("MulBigDouble RunTime:" + elapsedTime);
 
             return result;
         }
-         Int64 MulBigInt(int loop)
+         Int64 MulBigInt(int loop, out TimeSpan timeSpent)
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -192,16 +210,16 @@ namespace NetHardwareBench.Module.CPU
             stopWatch.Stop();
             // Get the elapsed time as a TimeSpan value.
             TimeSpan ts = stopWatch.Elapsed;
-
+            timeSpent = ts;
             // Format and display the TimeSpan value.
             string elapsedTime = String.Format("{0:00}:{1:00}.{2:000}",
                 ts.Minutes, ts.Seconds,
                 ts.Milliseconds);
-            Console.WriteLine("MulBigInt RunTime:" + elapsedTime);
+            base.WriteMessage("MulBigInt RunTime:" + elapsedTime);
 
             return result;
         }
-         double DivBigDouble(int loop)
+         double DivBigDouble(int loop, out TimeSpan timeSpent)
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -221,16 +239,16 @@ namespace NetHardwareBench.Module.CPU
 
             // Get the elapsed time as a TimeSpan value.
             TimeSpan ts = stopWatch.Elapsed;
-
+            timeSpent = ts;
             // Format and display the TimeSpan value.
             string elapsedTime = String.Format("{0:00}:{1:00}.{2:000}",
                 ts.Minutes, ts.Seconds,
                 ts.Milliseconds);
-            Console.WriteLine("DivBigDouble RunTime:" + elapsedTime);
+            base.WriteMessage("DivBigDouble RunTime:" + elapsedTime);
 
             return result;
         }
-         Int64 DivBigInt(int loop)
+         Int64 DivBigInt(int loop, out TimeSpan timeSpent)
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -249,16 +267,16 @@ namespace NetHardwareBench.Module.CPU
             stopWatch.Stop();
             // Get the elapsed time as a TimeSpan value.
             TimeSpan ts = stopWatch.Elapsed;
-
+            timeSpent = ts;
             // Format and display the TimeSpan value.
             string elapsedTime = String.Format("{0:00}:{1:00}.{2:000}",
                 ts.Minutes, ts.Seconds,
                 ts.Milliseconds);
-            Console.WriteLine("DivBigInt RunTime:" + elapsedTime);
+            base.WriteMessage("DivBigInt RunTime:" + elapsedTime);
 
             return result;
         }
-         double MulSmallDouble(int loop)
+         double MulSmallDouble(int loop, out TimeSpan timeSpent)
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -278,16 +296,16 @@ namespace NetHardwareBench.Module.CPU
 
             // Get the elapsed time as a TimeSpan value.
             TimeSpan ts = stopWatch.Elapsed;
-
+            timeSpent = ts;
             // Format and display the TimeSpan value.
             string elapsedTime = String.Format("{0:00}:{1:00}.{2:000}",
                 ts.Minutes, ts.Seconds,
                 ts.Milliseconds);
-            Console.WriteLine("MulSmallDouble RunTime:" + elapsedTime);
+            base.WriteMessage("MulSmallDouble RunTime:" + elapsedTime);
 
             return result;
         }
-         Int64 MulSmallInt(int loop)
+         Int64 MulSmallInt(int loop, out TimeSpan timeSpent)
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -306,16 +324,16 @@ namespace NetHardwareBench.Module.CPU
             stopWatch.Stop();
             // Get the elapsed time as a TimeSpan value.
             TimeSpan ts = stopWatch.Elapsed;
-
+            timeSpent = ts;
             // Format and display the TimeSpan value.
             string elapsedTime = String.Format("{0:00}:{1:00}.{2:000}",
                 ts.Minutes, ts.Seconds,
                 ts.Milliseconds);
-            Console.WriteLine("MulSmallInt RunTime:" + elapsedTime);
+            base.WriteMessage("MulSmallInt RunTime:" + elapsedTime);
 
             return result;
         }
-         double DivSmallDouble(int loop)
+         double DivSmallDouble(int loop, out TimeSpan timeSpent)
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -335,16 +353,16 @@ namespace NetHardwareBench.Module.CPU
 
             // Get the elapsed time as a TimeSpan value.
             TimeSpan ts = stopWatch.Elapsed;
-
+            timeSpent = ts;
             // Format and display the TimeSpan value.
             string elapsedTime = String.Format("{0:00}:{1:00}.{2:000}",
                 ts.Minutes, ts.Seconds,
                 ts.Milliseconds);
-            Console.WriteLine("DivSmallDouble RunTime:" + elapsedTime);
+            base.WriteMessage("DivSmallDouble RunTime:" + elapsedTime);
 
             return result;
         }
-         Int64 DivSmallInt(int loop)
+         Int64 DivSmallInt(int loop, out TimeSpan timeSpent)
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -363,16 +381,16 @@ namespace NetHardwareBench.Module.CPU
             stopWatch.Stop();
             // Get the elapsed time as a TimeSpan value.
             TimeSpan ts = stopWatch.Elapsed;
-
+            timeSpent = ts;
             // Format and display the TimeSpan value.
             string elapsedTime = String.Format("{0:00}:{1:00}.{2:000}",
                 ts.Minutes, ts.Seconds,
                 ts.Milliseconds);
-            Console.WriteLine("DivSmallInt RunTime:" + elapsedTime);
+            base.WriteMessage("DivSmallInt RunTime:" + elapsedTime);
 
             return result;
         }
-         double AddBigDouble(int loop)
+         double AddBigDouble(int loop, out TimeSpan timeSpent)
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -392,16 +410,16 @@ namespace NetHardwareBench.Module.CPU
 
             // Get the elapsed time as a TimeSpan value.
             TimeSpan ts = stopWatch.Elapsed;
-
+            timeSpent = ts;
             // Format and display the TimeSpan value.
             string elapsedTime = String.Format("{0:00}:{1:00}.{2:000}",
                 ts.Minutes, ts.Seconds,
                 ts.Milliseconds);
-            Console.WriteLine("AddBigDouble RunTime:" + elapsedTime);
+            base.WriteMessage("AddBigDouble RunTime:" + elapsedTime);
 
             return result;
         }
-         Int64 AddBigInt(int loop)
+         Int64 AddBigInt(int loop, out TimeSpan timeSpent)
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -420,16 +438,16 @@ namespace NetHardwareBench.Module.CPU
             stopWatch.Stop();
             // Get the elapsed time as a TimeSpan value.
             TimeSpan ts = stopWatch.Elapsed;
-
+            timeSpent = ts;
             // Format and display the TimeSpan value.
             string elapsedTime = String.Format("{0:00}:{1:00}.{2:000}",
                 ts.Minutes, ts.Seconds,
                 ts.Milliseconds);
-            Console.WriteLine("AddBigInt RunTime:" + elapsedTime);
+            base.WriteMessage("AddBigInt RunTime:" + elapsedTime);
 
             return result;
         }
-         double SubBigDouble(int loop)
+         double SubBigDouble(int loop, out TimeSpan timeSpent)
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -449,16 +467,16 @@ namespace NetHardwareBench.Module.CPU
 
             // Get the elapsed time as a TimeSpan value.
             TimeSpan ts = stopWatch.Elapsed;
-
+            timeSpent = ts;
             // Format and display the TimeSpan value.
             string elapsedTime = String.Format("{0:00}:{1:00}.{2:000}",
                 ts.Minutes, ts.Seconds,
                 ts.Milliseconds);
-            Console.WriteLine("SubBigDouble RunTime:" + elapsedTime);
+            base.WriteMessage("SubBigDouble RunTime:" + elapsedTime);
 
             return result;
         }
-         Int64 SubBigInt(int loop)
+         Int64 SubBigInt(int loop, out TimeSpan timeSpent)
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -477,16 +495,16 @@ namespace NetHardwareBench.Module.CPU
             stopWatch.Stop();
             // Get the elapsed time as a TimeSpan value.
             TimeSpan ts = stopWatch.Elapsed;
-
+            timeSpent = ts;
             // Format and display the TimeSpan value.
             string elapsedTime = String.Format("{0:00}:{1:00}.{2:000}",
                 ts.Minutes, ts.Seconds,
                 ts.Milliseconds);
-            Console.WriteLine("SubBigInt RunTime:" + elapsedTime);
+            base.WriteMessage("SubBigInt RunTime:" + elapsedTime);
 
             return result;
         }
-         double AddSmallDouble(int loop)
+         double AddSmallDouble(int loop, out TimeSpan timeSpent)
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -506,16 +524,16 @@ namespace NetHardwareBench.Module.CPU
 
             // Get the elapsed time as a TimeSpan value.
             TimeSpan ts = stopWatch.Elapsed;
-
+            timeSpent = ts;
             // Format and display the TimeSpan value.
             string elapsedTime = String.Format("{0:00}:{1:00}.{2:000}",
                 ts.Minutes, ts.Seconds,
                 ts.Milliseconds);
-            Console.WriteLine("AddSmallDouble RunTime:" + elapsedTime);
+            base.WriteMessage("AddSmallDouble RunTime:" + elapsedTime);
 
             return result;
         }
-         Int64 AddSmallInt(int loop)
+         Int64 AddSmallInt(int loop, out TimeSpan timeSpent)
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -534,16 +552,16 @@ namespace NetHardwareBench.Module.CPU
             stopWatch.Stop();
             // Get the elapsed time as a TimeSpan value.
             TimeSpan ts = stopWatch.Elapsed;
-
+            timeSpent = ts;
             // Format and display the TimeSpan value.
             string elapsedTime = String.Format("{0:00}:{1:00}.{2:000}",
                 ts.Minutes, ts.Seconds,
                 ts.Milliseconds);
-            Console.WriteLine("AddSmallInt RunTime:" + elapsedTime);
+            base.WriteMessage("AddSmallInt RunTime:" + elapsedTime);
 
             return result;
         }
-         double SubSmallDouble(int loop)
+         double SubSmallDouble(int loop, out TimeSpan timeSpent)
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -563,16 +581,16 @@ namespace NetHardwareBench.Module.CPU
 
             // Get the elapsed time as a TimeSpan value.
             TimeSpan ts = stopWatch.Elapsed;
-
+            timeSpent = ts;
             // Format and display the TimeSpan value.
             string elapsedTime = String.Format("{0:00}:{1:00}.{2:000}",
                 ts.Minutes, ts.Seconds,
                 ts.Milliseconds);
-            Console.WriteLine("SubSmallDouble RunTime:" + elapsedTime);
+            base.WriteMessage("SubSmallDouble RunTime:" + elapsedTime);
 
             return result;
         }
-         Int64 SubSmallInt(int loop)
+         Int64 SubSmallInt(int loop, out TimeSpan timeSpent)
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -591,40 +609,59 @@ namespace NetHardwareBench.Module.CPU
             stopWatch.Stop();
             // Get the elapsed time as a TimeSpan value.
             TimeSpan ts = stopWatch.Elapsed;
-
+            timeSpent = ts;
             // Format and display the TimeSpan value.
             string elapsedTime = String.Format("{0:00}:{1:00}.{2:000}",
                 ts.Minutes, ts.Seconds,
                 ts.Milliseconds);
-            Console.WriteLine("SubSmallInt RunTime:" + elapsedTime);
+            base.WriteMessage("SubSmallInt RunTime:" + elapsedTime);
 
             return result;
         }
 
-         void StartBigBenchmark()
+        List<BenchmarkPartialResult> StartBigBenchmark()
         {
+            List<BenchmarkPartialResult> result = new List<BenchmarkPartialResult>();
+            TimeSpan TimeSpent = new TimeSpan();
             Init();
             int loop = 1000000;
-            Console.WriteLine("Multiplication and Division Benchmark");
-            Console.WriteLine("=====================================");
-            MulBigDouble(loop);
-            MulBigInt(loop);
-            DivBigDouble(loop);
-            DivBigInt(loop);
-            MulSmallDouble(loop);
-            MulSmallInt(loop);
-            DivSmallDouble(loop);
-            DivSmallInt(loop);
-            Console.WriteLine("\nAddition and Subtraction Benchmark");
-            Console.WriteLine("==================================");
-            AddBigDouble(loop);
-            AddBigInt(loop);
-            SubBigDouble(loop);
-            SubBigInt(loop);
-            AddSmallDouble(loop);
-            AddSmallInt(loop);
-            SubSmallDouble(loop);
-            SubSmallInt(loop);
+            base.WriteMessage("Multiplication and Division Benchmark");
+            base.WriteMessage("=====================================");
+            MulBigDouble(loop, out TimeSpent);
+            result.Add(new BenchmarkPartialResult() { MetricScale = MetricScaleType.SECOND, Description = "CPU - MulBigDouble" , ResultType = BenchmarkResultType.SPEED_TIME, Score = TimeSpent.TotalSeconds});
+            MulBigInt(loop, out TimeSpent);
+            result.Add(new BenchmarkPartialResult() { MetricScale = MetricScaleType.SECOND, Description = "CPU - MulBigInt", ResultType = BenchmarkResultType.SPEED_TIME, Score = TimeSpent.TotalSeconds });
+            DivBigDouble(loop, out TimeSpent);
+            result.Add(new BenchmarkPartialResult() { MetricScale = MetricScaleType.SECOND, Description = "CPU - DivBigDouble", ResultType = BenchmarkResultType.SPEED_TIME, Score = TimeSpent.TotalSeconds });
+            DivBigInt(loop, out TimeSpent);
+            result.Add(new BenchmarkPartialResult() { MetricScale = MetricScaleType.SECOND, Description = "CPU - DivBigInt", ResultType = BenchmarkResultType.SPEED_TIME, Score = TimeSpent.TotalSeconds });
+            MulSmallDouble(loop, out TimeSpent);
+            result.Add(new BenchmarkPartialResult() { MetricScale = MetricScaleType.SECOND, Description = "CPU - MulSmallDouble", ResultType = BenchmarkResultType.SPEED_TIME, Score = TimeSpent.TotalSeconds });
+            MulSmallInt(loop, out TimeSpent);
+            result.Add(new BenchmarkPartialResult() { MetricScale = MetricScaleType.SECOND, Description = "CPU - MulSmallInt", ResultType = BenchmarkResultType.SPEED_TIME, Score = TimeSpent.TotalSeconds });
+            DivSmallDouble(loop, out TimeSpent);
+            result.Add(new BenchmarkPartialResult() { MetricScale = MetricScaleType.SECOND, Description = "CPU - DivSmallDouble", ResultType = BenchmarkResultType.SPEED_TIME, Score = TimeSpent.TotalSeconds });
+            DivSmallInt(loop, out TimeSpent);
+            result.Add(new BenchmarkPartialResult() { MetricScale = MetricScaleType.SECOND, Description = "CPU - DivSmallInt", ResultType = BenchmarkResultType.SPEED_TIME, Score = TimeSpent.TotalSeconds });
+            base.WriteMessage("\nAddition and Subtraction Benchmark");
+            base.WriteMessage("==================================");
+            AddBigDouble(loop, out TimeSpent);
+            result.Add(new BenchmarkPartialResult() { MetricScale = MetricScaleType.SECOND, Description = "CPU - AddBigDouble", ResultType = BenchmarkResultType.SPEED_TIME, Score = TimeSpent.TotalSeconds });
+            AddBigInt(loop, out TimeSpent);
+            result.Add(new BenchmarkPartialResult() { MetricScale = MetricScaleType.SECOND, Description = "CPU - AddBigInt", ResultType = BenchmarkResultType.SPEED_TIME, Score = TimeSpent.TotalSeconds });
+            SubBigDouble(loop, out TimeSpent);
+            result.Add(new BenchmarkPartialResult() { MetricScale = MetricScaleType.SECOND, Description = "CPU - SubBigDouble", ResultType = BenchmarkResultType.SPEED_TIME, Score = TimeSpent.TotalSeconds });
+            SubBigInt(loop, out TimeSpent);
+            result.Add(new BenchmarkPartialResult() { MetricScale = MetricScaleType.SECOND, Description = "CPU - SubBigInt", ResultType = BenchmarkResultType.SPEED_TIME, Score = TimeSpent.TotalSeconds });
+            AddSmallDouble(loop, out TimeSpent);
+            result.Add(new BenchmarkPartialResult() { MetricScale = MetricScaleType.SECOND, Description = "CPU - AddSmallDouble", ResultType = BenchmarkResultType.SPEED_TIME, Score = TimeSpent.TotalSeconds });
+            AddSmallInt(loop, out TimeSpent);
+            result.Add(new BenchmarkPartialResult() { MetricScale = MetricScaleType.SECOND, Description = "CPU - AddSmallInt", ResultType = BenchmarkResultType.SPEED_TIME, Score = TimeSpent.TotalSeconds });
+            SubSmallDouble(loop, out TimeSpent);
+            result.Add(new BenchmarkPartialResult() { MetricScale = MetricScaleType.SECOND, Description = "CPU - SubSmallDouble", ResultType = BenchmarkResultType.SPEED_TIME, Score = TimeSpent.TotalSeconds });
+            SubSmallInt(loop, out TimeSpent);
+            result.Add(new BenchmarkPartialResult() { MetricScale = MetricScaleType.SECOND, Description = "CPU - SubSmallInt", ResultType = BenchmarkResultType.SPEED_TIME, Score = TimeSpent.TotalSeconds });
+            return result;
         }
 
 

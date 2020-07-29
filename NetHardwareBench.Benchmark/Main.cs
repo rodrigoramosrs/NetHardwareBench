@@ -33,6 +33,7 @@ namespace NetHardwareBench.Benchmark
 
                 AttachEvents(ref benchmarkModule, true);
                 var benchmarkResultPartial = benchmarkModule.DoBenchmark();
+                benchmarkResultPartial.BenchmarkType = BenchmarkTypes[i];
                 BenchmarkResultList.Add(benchmarkResultPartial);
                 AttachEvents(ref benchmarkModule, false);
 

@@ -23,10 +23,41 @@ namespace NetHardwareBench.App.Commons
                     .DoBenchmark(
                     BenchmarkType.NETWORK,
                     BenchmarkType.INTERNET,
-                    BenchmarkType.GPU,
+                   // BenchmarkType.GPU,
                     BenchmarkType.LOCAL_STORAGE,
                     BenchmarkType.RAM,
-                    BenchmarkType.CPU);
+                    BenchmarkType.CPU
+                    );
+
+                Console.WriteLine("Benchmark Results");
+                foreach (var result in benchmarkResult)
+                {
+                    Console.WriteLine($"[{result.BenchmarkType.ToString()}]\r\n|- AVG: " + result.Score + " | Score: " +
+                               ScoreParser.Calculate(result.BenchmarkType, result.Score) + " %");
+
+                    switch (result.BenchmarkType)
+                    {
+                      
+                        case BenchmarkType.INTERNET:
+                        case BenchmarkType.LOCAL_STORAGE:
+
+                            foreach (var partialresult in result.PartialResults)
+                            {
+                                Console.WriteLine($" |- {partialresult.Description}: " + partialresult.Score + " | Score: " +
+                                ScoreParser.Calculate(result.BenchmarkType, partialresult.Score) + " %");
+                            }
+                            break;
+                        case BenchmarkType.NETWORK_STORAGE:
+                        case BenchmarkType.DATABASE:
+                        case BenchmarkType.RAM:
+                        case BenchmarkType.NETWORK:
+                        case BenchmarkType.CPU:
+                        case BenchmarkType.GPU:
+                        default:
+                            break;
+                    }
+                    
+                }
                 Console.ReadKey();
             }
 

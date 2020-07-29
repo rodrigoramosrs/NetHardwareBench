@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using NetHardwareBench.Model;
 using NetHardwareBench.Model.Modules.Parameters;
 using NetHardwareBench.Model.Modules.Types;
@@ -13,14 +15,15 @@ namespace NetHardwareBench.Module.RAM
         public override BenchmarkResult DoBenchmark()
         {
             BenchmarkResult result = new BenchmarkResult();
-            Console.WriteLine("== Starting RAM Benchmark ==\r\n");
+            base.WriteMessage("== Starting RAM Benchmark ==\r\n");
             result.StepsDetails.Add("Starting RAM Benchmark");
 
             result.StartedAt = DateTime.Now;
 
-            DoInternalBenchmark();
+            result.PartialResults = DoInternalBenchmark();
             result.FinishedAt = DateTime.Now;
-            Console.WriteLine("== Finished RAM Benchmark ==\r\n\r\n");
+            result.Score = Math.Round(result.PartialResults.Sum(x => x.Score) / result.PartialResults.Count,2);
+            base.WriteMessage("== Finished RAM Benchmark ==\r\n\r\n");
             result.StepsDetails.Add("Finished RAM Benchmark");
 
             return result;
@@ -31,9 +34,9 @@ namespace NetHardwareBench.Module.RAM
             return BenchmarkType.RAM;
         }
 
-        private void DoInternalBenchmark()
+        private List<BenchmarkPartialResult> DoInternalBenchmark()
         {
-            runTest();
+            return runTest();
         }
 
 
@@ -106,11 +109,12 @@ namespace NetHardwareBench.Module.RAM
 
 
 
-        public void runTest()
+        public List<BenchmarkPartialResult> runTest()
         {
             testRunning = true;
             abortTest = false;
             long MegabytesToTest = 1500;
+            List<BenchmarkPartialResult> result = new List<BenchmarkPartialResult>();
 
             Int64[] ramInfo = getRAMinfo();
             Int64 autoRam = Convert.ToInt64(Math.Floor((RAMFree * 0.75)));
@@ -175,8 +179,8 @@ namespace NetHardwareBench.Module.RAM
                     SpeedArray[CurrentSpeedIterationIndex] = BytesPerSecond;
                     CurrentSpeedIterationIndex++;
 
-                    Console.WriteLine(bytesToSize(BytesWritten) + " written" + " | " + bytesToSize(BytesLeft) + " left | " + bytesToSize(BytesPerSecond) + "/s");
-                    //Console.WriteLine(bytesToSize();
+                    base.WriteMessage(bytesToSize(BytesWritten) + " written" + " | " + bytesToSize(BytesLeft) + " left | " + bytesToSize(BytesPerSecond) + "/s");
+                    //base.WriteMessage(bytesToSize();
                 }
             }
 
@@ -195,9 +199,18 @@ namespace NetHardwareBench.Module.RAM
             DateTime stTime = DateTime.Now;
             TimeSpan dur = stTime - sTime;
 
-            Console.WriteLine("Test completed in " + dur.Minutes.ToString() + " mins " + dur.Seconds.ToString() + " secs" + Environment.NewLine + Environment.NewLine + "Average RAM speed is " + bytesToSize(avg) + " per second.");
+            base.WriteMessage("Test completed in " + dur.Minutes.ToString() + " mins " + dur.Seconds.ToString() + " secs" + Environment.NewLine + Environment.NewLine + "Average RAM speed is " + bytesToSize(avg) + " per second.");
 
+            result.Add(new BenchmarkPartialResult()
+            {
+                Description = "MEMORY - WRITE_SPEED",
+                MetricScale = MetricScaleType.MEGABYTE,
+                ResultType = BenchmarkResultType.WRITE_SPEED,
+                Score = Math.Round(Convert.ToDouble(avg / 1024) / 1024, 2)
+            }); ;
+            //result.Score = Math.Round(Convert.ToDouble(avg / 1024) /1024,2);
             testRunning = false;
+            return result;
         }
 
    
@@ -206,7 +219,7 @@ namespace NetHardwareBench.Module.RAM
         {
             int bps = LastWrite * 4;
             LastWrite = 0;
-            Console.WriteLine(bytesToSize(bps) + "/s");
+            base.WriteMessage(bytesToSize(bps) + "/s");
         }
 
         private void button2_Click(object sender, EventArgs e)

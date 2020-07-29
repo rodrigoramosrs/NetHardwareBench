@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.NetworkInformation;
 using System.Threading;
 using NetHardwareBench.Model;
@@ -15,14 +17,15 @@ namespace NetHardwareBench.Module.Network
         public override BenchmarkResult DoBenchmark()
         {
             BenchmarkResult result = new BenchmarkResult();
-            Console.WriteLine("== Starting Network Benchmark ==\r\n");
+            base.WriteMessage("== Starting Network Benchmark ==\r\n");
             result.StepsDetails.Add("Starting Network Benchmark");
 
             result.StartedAt = DateTime.Now;
 
-            this.DoInternalBenchmark();
+            result.PartialResults = this.DoInternalBenchmark();
+            result.Score = Math.Round(result.PartialResults.Sum(x => x.Score) / result.PartialResults.Count, 2);
             result.FinishedAt = DateTime.Now;
-            Console.WriteLine("== Finished Network Benchmark ==\r\n\r\n");
+            base.WriteMessage("== Finished Network Benchmark ==\r\n\r\n");
             result.StepsDetails.Add("Finished Network Benchmark");
 
             return result;
@@ -33,10 +36,11 @@ namespace NetHardwareBench.Module.Network
             return BenchmarkType.NETWORK;
         }
 
-        private void DoInternalBenchmark()
+        private List<BenchmarkPartialResult> DoInternalBenchmark()
         {
             string remoteAddress = "www.google.com.br";
-            Console.WriteLine("Start Ping to " + remoteAddress);
+            List<BenchmarkPartialResult> result = new List<BenchmarkPartialResult>();
+            base.WriteMessage("Start Ping to " + remoteAddress);
 
             TimeSpan timeSpent = new TimeSpan();
             double TotalTime = 0;
@@ -45,10 +49,23 @@ namespace NetHardwareBench.Module.Network
             {
                 DoPing(remoteAddress, out timeSpent);
                 TotalTime += timeSpent.Milliseconds;
+
+                result.Add(new BenchmarkPartialResult()
+                {
+                    Description = $"NETWORK - DELAY [{i}]",
+                    MetricScale = MetricScaleType.MILLISECOND,
+                    ResultType = BenchmarkResultType.PING,
+                    Score = timeSpent.Milliseconds
+                });
                 Thread.Sleep(100);
+
             }
 
-            Console.WriteLine("AVG: " + Math.Round(TotalTime / NumberOfTests ) + "ms");
+            
+            base.WriteMessage("AVG: " + Math.Round(TotalTime / NumberOfTests ) + "ms");
+            
+            //result.Score = Math.Round(TotalTime / NumberOfTests, 2);
+            return result;
         }
 
         private bool DoPing(string RemoteIpOrName, out TimeSpan TimeSpent)
@@ -68,11 +85,11 @@ namespace NetHardwareBench.Module.Network
                     TimeSpent = cronometro.Elapsed;
                     result = pingResponse.Status == IPStatus.Success;
 
-                    Console.WriteLine(" Ping " + RemoteIpOrName + " [" + pingResponse.Status.ToString() + "]: " + cronometro.Elapsed.Milliseconds.ToString() + "ms");
+                    base.WriteMessage(" Ping " + RemoteIpOrName + " [" + pingResponse.Status.ToString() + "]: " + cronometro.Elapsed.Milliseconds.ToString() + "ms");
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.ToString());
+                    base.WriteMessage(ex.ToString());
                 }
             }
 

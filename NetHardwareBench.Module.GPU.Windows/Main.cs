@@ -16,13 +16,13 @@ namespace NetHardwareBench.Module.GPU.Windows
         public override BenchmarkResult DoBenchmark()
         {
             BenchmarkResult result = new BenchmarkResult();
-            Console.WriteLine("== Starting GPU Benchmark ==\r\n");
+            base.WriteMessage("== Starting GPU Benchmark ==\r\n");
             result.StepsDetails.Add("Starting GPU Benchmark");
 
             result.StartedAt = DateTime.Now;
             DoInternalBenchmark();
             result.FinishedAt = DateTime.Now;
-            Console.WriteLine("== Finished GPU Benchmark ==\r\n\r\n");
+            base.WriteMessage("== Finished GPU Benchmark ==\r\n\r\n");
             result.StepsDetails.Add("Finished GPU Benchmark");
             return result;
         }
@@ -90,33 +90,33 @@ namespace NetHardwareBench.Module.GPU.Windows
             });
         }
 
-        static void BenchmarkDevice(AcceleratorDevice Device)
+        void BenchmarkDevice(AcceleratorDevice Device)
         {
             Console.Write("\tSingle GFlops = ");
-            Console.WriteLine(EasyCL.GetDeviceGFlops_Single(Device).ToString("0.00") + "GFlops");
+            base.WriteMessage(EasyCL.GetDeviceGFlops_Single(Device).ToString("0.00") + "GFlops");
 
             Console.Write("\tDouble GFlops = ");
-            Console.WriteLine(EasyCL.GetDeviceGFlops_Double(Device).ToString("0.00") + "GFlops");
+            base.WriteMessage(EasyCL.GetDeviceGFlops_Double(Device).ToString("0.00") + "GFlops");
 
             Console.Write("\tMemory Bandwidth = ");
-            Console.WriteLine(EasyCL.GetDeviceBandwidth_GBps(Device).ToString("0.00") + "GByte/s");
-            Console.WriteLine();
+            base.WriteMessage(EasyCL.GetDeviceBandwidth_GBps(Device).ToString("0.00") + "GByte/s");
+            base.WriteMessage("");
         }
 
-        static void DoInternalBenchmark()
+        void DoInternalBenchmark()
         {
             int Devices = AcceleratorDevice.All.Length;
 
             foreach (var AcceleratorDevice in AcceleratorDevice.All)
             {
-                Console.WriteLine(AcceleratorDevice);
+                base.WriteMessage(AcceleratorDevice.ToString());
                 BenchmarkDevice(AcceleratorDevice);
             }
 
-            Console.WriteLine("Please share results @ " + "https://www.codeproject.com/Articles/1116907/How-to-Use-Your-GPU-in-NET");
+            base.WriteMessage("Please share results @ " + "https://www.codeproject.com/Articles/1116907/How-to-Use-Your-GPU-in-NET");
 
-            Console.WriteLine("");
-            Console.WriteLine("Get Prime Number Performance");
+            base.WriteMessage("");
+            base.WriteMessage("Get Prime Number Performance");
 
             int WorkSize = 5000000;
             int[] ArrayA = GetArray(WorkSize);
@@ -145,23 +145,23 @@ namespace NetHardwareBench.Module.GPU.Windows
 
                 if (AcceleratorDevice.HasGPU)
                 {
-                    Console.WriteLine("");
-                    Console.WriteLine("Async Test");
+                    base.WriteMessage("");
+                    base.WriteMessage("Async Test");
                     AsyncTest(ArrayE);
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                base.WriteMessage(ex.Message);
             }
         }
 
-        static int[] GetArray(int Worksize)
+        int[] GetArray(int Worksize)
         {
             return Enumerable.Range(2, Worksize).ToArray();
         }
 
-        static void AsyncTest(int[] WorkSet)
+        void AsyncTest(int[] WorkSet)
         {
             EasyCL cl = new EasyCL()
             {
@@ -178,12 +178,12 @@ namespace NetHardwareBench.Module.GPU.Windows
             }
             double millis = time.Elapsed.TotalMilliseconds;
 
-            Console.WriteLine(i + $" CPU cycles saved ({millis.ToString("0.00")}ms)");
+            base.WriteMessage(i + $" CPU cycles saved ({millis.ToString("0.00")}ms)");
         }
 
-        static void RunCPU(int[] WorkSet)
+        void RunCPU(int[] WorkSet)
         {
-            Console.WriteLine("\nRun on CPU: " + AcceleratorDevice.CPU.ToString());
+            base.WriteMessage("\nRun on CPU: " + AcceleratorDevice.CPU.ToString());
             EasyCL cl = new EasyCL()
             {
                 Accelerator = AcceleratorDevice.CPU
@@ -196,24 +196,24 @@ namespace NetHardwareBench.Module.GPU.Windows
 
             time.Stop();
             double performance = WorkSet.Length / (1000000.0 * time.Elapsed.TotalSeconds);
-            Console.WriteLine("\t" + performance.ToString("0.00") + " MegaPrimes/Sec");
+            base.WriteMessage("\t" + performance.ToString("0.00") + " MegaPrimes/Sec");
         }
 
-        static void RunNative(int[] WorkSet)
+        void RunNative(int[] WorkSet)
         {
-            Console.WriteLine("\nRun in C# only");
+            base.WriteMessage("\nRun in C# only");
             Stopwatch time = Stopwatch.StartNew();
 
             IsPrimeNet(WorkSet);
 
             time.Stop();
             double performance = WorkSet.Length / (1000000.0 * time.Elapsed.TotalSeconds);
-            Console.WriteLine("\t" + performance.ToString("0.00") + " MegaPrimes/Sec");
+            base.WriteMessage("\t" + performance.ToString("0.00") + " MegaPrimes/Sec");
         }
 
-        static void RunGPU(int[] WorkSet)
+        void RunGPU(int[] WorkSet)
         {
-            Console.WriteLine("\nRun on GPU: " + AcceleratorDevice.GPU.ToString());
+            base.WriteMessage("\nRun on GPU: " + AcceleratorDevice.GPU.ToString());
 
             EasyCL cl = new EasyCL()
             {
@@ -227,12 +227,12 @@ namespace NetHardwareBench.Module.GPU.Windows
 
             time.Stop();
             double performance = WorkSet.Length / (1000000.0 * time.Elapsed.TotalSeconds);
-            Console.WriteLine("\t" + performance.ToString("0.00") + " MegaPrimes/Sec");
+            base.WriteMessage("\t" + performance.ToString("0.00") + " MegaPrimes/Sec");
         }
 
-        static void RunAllDevices(int[] WorkSet)
+        void RunAllDevices(int[] WorkSet)
         {
-            Console.WriteLine("\nCombined run on " + AcceleratorDevice.All.Length + " Device/s");
+            base.WriteMessage("\nCombined run on " + AcceleratorDevice.All.Length + " Device/s");
             MultiCL cl = new MultiCL();
             cl.SetKernel(IsPrime, "GetIfPrime");
             cl.SetParameter(WorkSet);
@@ -242,14 +242,14 @@ namespace NetHardwareBench.Module.GPU.Windows
             cl.Invoke(0, WorkSet.Length, 200);
             time.Stop();
             double performance = WorkSet.Length / (1000000.0 * time.Elapsed.TotalSeconds);
-            Console.WriteLine("\t" + performance.ToString("0.00") + " MegaPrimes/Sec");
+            base.WriteMessage("\t" + performance.ToString("0.00") + " MegaPrimes/Sec");
         }
 
 
 
-        private static void Cl_ProgressChangedEvent(object sender, double e)
+        private void Cl_ProgressChangedEvent(object sender, double e)
         {
-            Console.WriteLine(e.ToString("0.00%"));
+            base.WriteMessage(e.ToString("0.00%"));
         }
     }
 }

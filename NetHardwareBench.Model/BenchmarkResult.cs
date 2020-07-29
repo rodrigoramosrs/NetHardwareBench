@@ -9,8 +9,11 @@ namespace NetHardwareBench.Model
         public BenchmarkResult()
         {
             this.StepsDetails = new List<string>();
+            this.PartialResults = new List<BenchmarkPartialResult>();
         }
-        Modules.Types.BenchmarkType BenchmarkType { get; set; }
+
+        public List<BenchmarkPartialResult> PartialResults { get; set; }
+        public Modules.Types.BenchmarkType BenchmarkType { get; set; }
         public DateTime StartedAt { get; set; }
         public DateTime FinishedAt { get; set; }
 
@@ -19,7 +22,7 @@ namespace NetHardwareBench.Model
             get { return FinishedAt - StartedAt; }
         }
 
-        public int Score { get; set; }
+        public double Score { get; set; }
 
         public List<string> StepsDetails { get; set; }
     }

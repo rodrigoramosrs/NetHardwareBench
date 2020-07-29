@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using NetHardwareBench.Model;
 using NetHardwareBench.Model.Modules.Parameters;
 using NetHardwareBench.Model.Modules.Types;
+using System.Linq;
 
 namespace NetHardwareBench.Module.LocalStorage
 {
@@ -18,14 +19,17 @@ namespace NetHardwareBench.Module.LocalStorage
         public override BenchmarkResult DoBenchmark()
         {
             BenchmarkResult result = new BenchmarkResult();
-            Console.WriteLine("== Starting Local Storage Benchmark ==\r\n");
+            base.WriteMessage("== Starting Local Storage Benchmark ==\r\n");
             result.StepsDetails.Add("Starting Local Storage Benchmark");
 
             result.StartedAt = DateTime.Now;
 
-            this.DoInternalBenchmark();
+            result.PartialResults = this.DoInternalBenchmark();
+            result.Score = Math.Round(result.PartialResults.Sum( x => x.Score) / result.PartialResults.Count,2);
+            //result.StepsDetails.AddRange(testResult.StepsDetails);
+
             result.FinishedAt = DateTime.Now;
-            Console.WriteLine("== Finished Local Storage Benchmark ==\r\n\r\n");
+            base.WriteMessage("== Finished Local Storage Benchmark ==\r\n\r\n");
             result.StepsDetails.Add("Finished Local Storage Benchmark");
 
             return result;
@@ -88,19 +92,19 @@ namespace NetHardwareBench.Module.LocalStorage
                         i++;
                     }
 
-                    Console.WriteLine(
+                    base.WriteMessage(string.Format(
                         "[{0}] {1} {2:0.00} Gb free {3}",
                             flag ? " " : i.ToString(),
                             d.Name,
                             (double)d.TotalFreeSpace / 1024 / 1024 / 1024,
                             flag ? "- insufficient free space" : ""
-                            );
+                            ));
 
                     k++;
                 }
                 catch (Exception ex)
                 {
-                    //Console.WriteLine(ex);
+                    //base.WriteMessage(ex);
 
                 }
 
@@ -124,29 +128,58 @@ namespace NetHardwareBench.Module.LocalStorage
 
         public const string unit = "MB/s";
 
-        void DoInternalBenchmark()
+        List<BenchmarkPartialResult> DoInternalBenchmark()
         {
+            List<BenchmarkPartialResult> result = new List<BenchmarkPartialResult>();
+
+            base.WriteMessage("STORAGE SPEED TEST\n");
+
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            //base.WriteMessage("Total RAM: {0:0.00}Gb, Available RAM: {1:0.00}Gb\n", (double)RamDiskUtil.TotalRam / 1024 / 1024 / 1024, (double)RamDiskUtil.FreeRam / 1024 / 1024 / 1024);
+            WriteLineWordWrap("The test uses standrd OS's file API (WinAPI on Windows and POSIX on Mac/Linux) to measure the speed of transfers between storage device and system memory.\nWrite buffering and mem cahce are disabled\n");
+            Console.ResetColor();
+
+            const long fileSize = 1024 * 1024 * 1024;
+
+            //var drivePath = PickDrive(fileSize);
+
+            //if (drivePath == null) return result;
+
+            var drivers = RamDiskUtil.GetEligibleDrives();
+
+            foreach (var driver in drivers)
+            {
+                if(driver.TotalFreeSpace < fileSize)
+                {
+                    base.WriteMessage($"CANNOT BENCHMARK LOCAL STORAGE SPEED FOR DRIVER [{driver.Name}] - Not enough space");
+                }
+                else
+                {
+                    try
+                    {
+                        var testSuite = new BigTest(driver.Name, fileSize, false);
+                        result.AddRange(DoDiskBenchmark(testSuite, driver.Name));
+                    }
+                    catch (Exception ex)
+                    {
+                        string message = $"Error while test disk [{driver.Name}]";
+                        base.WriteMessage(message + ex.ToString());
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        private List<BenchmarkPartialResult> DoDiskBenchmark(BigTest testSuite, string driverName)
+        {
+            List<BenchmarkPartialResult> result = new List<BenchmarkPartialResult>();
             try
             {
-                Console.WriteLine("STORAGE SPEED TEST\n");
-
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                //Console.WriteLine("Total RAM: {0:0.00}Gb, Available RAM: {1:0.00}Gb\n", (double)RamDiskUtil.TotalRam / 1024 / 1024 / 1024, (double)RamDiskUtil.FreeRam / 1024 / 1024 / 1024);
-                WriteLineWordWrap("The test uses standrd OS's file API (WinAPI on Windows and POSIX on Mac/Linux) to measure the speed of transfers between storage device and system memory.\nWrite buffering and mem cahce are disabled\n");
-                Console.ResetColor();
-
-                const long fileSize = 1024 * 1024 * 1024;
-
-                var drivePath = PickDrive(fileSize);
-
-                if (drivePath == null) return;
-
-                var testSuite = new BigTest(drivePath, fileSize, false);
-
                 using (testSuite)
                 {
 
-                    Console.WriteLine("Test file: {0}, Size: {1:0.00}Gb\n\n Press ESC to break", testSuite.FilePath, (double)testSuite.FileSize / 1024 / 1024 / 1024);
+                    base.WriteMessage(string.Format("Test file: {0}, Size: {1:0.00}Gb\n\n Press ESC to break", testSuite.FilePath, (double)testSuite.FileSize / 1024 / 1024 / 1024));
 
                     string currentTest = null;
                     const int curCursor = 40;
@@ -213,7 +246,7 @@ namespace NetHardwareBench.Module.LocalStorage
 
                         if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Escape)
                         {
-                            Console.WriteLine("  Stopping...");
+                            base.WriteMessage("  Stopping...");
                             breakTest = true;
                             testSuite.Break();
                         }
@@ -225,29 +258,51 @@ namespace NetHardwareBench.Module.LocalStorage
 
                     if (!breakTest)
                     {
-                        Console.WriteLine("\n\nWrite Score*:\t {0:0.00} MB/s", testSuite.WriteScore);
-                        Console.WriteLine("Read Score*:\t {0:0.00} MB/s", testSuite.ReadScore);
+                        base.WriteMessage(string.Format("\n\nWrite Score*:\t {0:0.00} MB/s", testSuite.WriteScore));
+                        base.WriteMessage(string.Format("Read Score*:\t {0:0.00} MB/s", testSuite.ReadScore));
                         Console.ForegroundColor = ConsoleColor.DarkGray;
-                        Console.WriteLine("*Calculation: average throughput with 80% read/written seqentialy and 20% randomly");
+                        base.WriteMessage("*Calculation: average throughput with 80% read/written seqentialy and 20% randomly");
                         Console.ResetColor();
-                        Console.WriteLine("\nTest file deleted.");
-                        //Console.WriteLine("\nTest file deleted.  Saving results to CSV files in folder: " + testSuite.ResultsFolderPath);
+                        base.WriteMessage("\nTest file deleted.");
+
+                        result.Add(new BenchmarkPartialResult()
+                        {
+                            Description = $"LOCAL STORAGE SPEED - WRITE [{driverName}]",
+                            MetricScale = MetricScaleType.MEGABYTE,
+                            ResultType = BenchmarkResultType.UPLOAD_SPEED,
+                            Score = Math.Round(testSuite.WriteScore, 2)
+                        });
+
+                        result.Add(new BenchmarkPartialResult()
+                        {
+                            Description = $"LOCAL STORAGE SPEED - READ [{driverName}]",
+                            MetricScale = MetricScaleType.MEGABYTE,
+                            ResultType = BenchmarkResultType.UPLOAD_SPEED,
+                            Score = Math.Round(testSuite.ReadScore, 2)
+                        });
+
+
+                        //result.Score = Math.Round((testSuite.WriteScore + testSuite.ReadScore) / 2,2);
+                        //result.StepsDetails.Add(string.Format("Write Score*:\t {0:0.00} MB/s", testSuite.WriteScore) + " | " + string.Format("Read Score*:\t {0:0.00} MB/s", testSuite.ReadScore));
+                        //base.WriteMessage("\nTest file deleted.  Saving results to CSV files in folder: " + testSuite.ResultsFolderPath);
                         //testSuite.ExportToCsv(testSuite.ResultsFolderPath, true);
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("\nProgram interupted due to unexpected error:");
-                Console.WriteLine("\t" + ex.GetType() + " " + ex.Message);
-                Console.WriteLine(ex.StackTrace);
+                base.WriteMessage("\nProgram interupted due to unexpected error:");
+                base.WriteMessage("\t" + ex.GetType() + " " + ex.Message);
+                base.WriteMessage(ex.StackTrace);
             }
 
-            if (!RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX))
+            /*if (!RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX))
             {
-                Console.WriteLine("\nPress any key to quit");
+                base.WriteMessage("\nPress any key to quit");
                 Console.ReadKey();
-            }
+            }*/
+
+            return result;
         }
 
         private void ClearLine(int cursorLeft)
@@ -317,10 +372,10 @@ namespace NetHardwareBench.Module.LocalStorage
 
                 foreach (string wrap in wrapped)
                 {
-                    Console.WriteLine(wrap);
+                    base.WriteMessage(wrap);
                 }
 
-                Console.WriteLine(process);
+                base.WriteMessage(process);
             }
         }
 

@@ -53,7 +53,7 @@ namespace NetHardwareBench.App.Commons
         {
             if (Score < 2) return "0";
 
-            if (Score > 2 && Score < 5) return "25%";
+            if (Score > 2 && Score < 5) return "25";
 
             if (Score > 5 && Score < 10) return "50";
 

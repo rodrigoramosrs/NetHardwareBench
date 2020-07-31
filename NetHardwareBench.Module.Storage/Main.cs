@@ -24,7 +24,16 @@ namespace NetHardwareBench.Module.LocalStorage
 
             result.StartedAt = DateTime.Now;
 
-            result.PartialResults = this.DoInternalBenchmark();
+            try
+            {
+                result.PartialResults = this.DoInternalBenchmark();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
             result.Score = Math.Round(result.PartialResults.Sum( x => x.Score) / result.PartialResults.Count,2);
             //result.StepsDetails.AddRange(testResult.StepsDetails);
 
@@ -73,6 +82,7 @@ namespace NetHardwareBench.Module.LocalStorage
 
         private string PickDrive(long freeSpace)
         {
+
             var i = 0;
             var k = 0;
 
@@ -110,7 +120,7 @@ namespace NetHardwareBench.Module.LocalStorage
 
             }
 
-            Console.Write("- please pick drive to test: ");
+            TryWriteConsole(string.Format("- please pick drive to test: "));
 
             int index;
             do
@@ -134,10 +144,10 @@ namespace NetHardwareBench.Module.LocalStorage
 
             base.WriteMessage("STORAGE SPEED TEST\n");
 
-            Console.ForegroundColor = ConsoleColor.DarkGray;
+            //Console.ForegroundColor = ConsoleColor.DarkGray;
             //base.WriteMessage("Total RAM: {0:0.00}Gb, Available RAM: {1:0.00}Gb\n", (double)RamDiskUtil.TotalRam / 1024 / 1024 / 1024, (double)RamDiskUtil.FreeRam / 1024 / 1024 / 1024);
             WriteLineWordWrap("The test uses standrd OS's file API (WinAPI on Windows and POSIX on Mac/Linux) to measure the speed of transfers between storage device and system memory.\nWrite buffering and mem cahce are disabled\n");
-            Console.ResetColor();
+            //Console.ResetColor();
 
             const long fileSize = 1024 * 1024 * 1024;
 
@@ -174,6 +184,11 @@ namespace NetHardwareBench.Module.LocalStorage
             return result;
         }
 
+        private void TryWriteConsole(string Message)
+        {
+            Console.Write(Message);
+        }
+
         private List<BenchmarkPartialResult> DoDiskBenchmark(BigTest testSuite, string driverName)
         {
             List<BenchmarkPartialResult> result = new List<BenchmarkPartialResult>();
@@ -191,12 +206,12 @@ namespace NetHardwareBench.Module.LocalStorage
                     testSuite.StatusUpdate += (sender, e) =>
                     {
                         if (breakTest) return;
-                        if (e.Status == TestStatus.NotStarted) return;
+                        //if (e.Status == TestStatus.NotStarted) return;
 
                         if ((sender as Test).DisplayName != currentTest)
                         {
                             currentTest = (sender as Test).DisplayName;
-                            Console.Write("\n{0}/{1} {2}", testSuite.CompletedTests + 1, testSuite.TotalTests, (sender as Test).DisplayName);
+                            TryWriteConsole(string.Format("\n{0}/{1} {2}", testSuite.CompletedTests + 1, testSuite.TotalTests, (sender as Test).DisplayName));
                         }
 
                         ClearLine(curCursor);
@@ -207,54 +222,65 @@ namespace NetHardwareBench.Module.LocalStorage
                             switch (e.Status)
                             {
                                 case TestStatus.Started:
-                                    Console.Write("Started");
+                                    TryWriteConsole(string.Format("Started"));
                                     break;
                                 case TestStatus.InitMemBuffer:
-                                    Console.Write("Initializing test data in RAM...");
+                                    TryWriteConsole(string.Format("Initializing test data in RAM..."));
                                     break;
                                 case TestStatus.PurgingMemCache:
-                                    Console.Write("Purging file cache in RAM...");
+                                    TryWriteConsole(string.Format("Purging file cache in RAM..."));
                                     break;
                                 case TestStatus.WarmigUp:
-                                    Console.Write("Warming up...");
+                                    TryWriteConsole(string.Format("Warming up..."));
                                     break;
                                 case TestStatus.Interrupted:
-                                    Console.Write("Test interrupted");
+                                    TryWriteConsole(string.Format("Test interrupted"));
                                     break;
                                 case TestStatus.Running:
-                                    Console.Write("{0}% {2} {1:0.00} MB/s", e.ProgressPercent, e.RecentResult, GetNextAnimation());
+                                    TryWriteConsole(string.Format("{0}% {2} {1:0.00} MB/s", e.ProgressPercent, e.RecentResult, GetNextAnimation()));
                                     break;
                             }
-                            Console.ResetColor();
+                           // Console.ResetColor();
                         }
                         else if ((e.Status == TestStatus.Completed) && (e.Results != null))
                         {
-                            Console.Write(
+                            TryWriteConsole(string.Format(
                                 string.Format("Avg: {1:0.00}{0}\t",
                                 unit,
-                                e.Results.AvgThroughput)
+                                e.Results.AvgThroughput))
                             );
 
-                            Console.ForegroundColor = ConsoleColor.DarkGray;
-                            Console.Write(
+                            //Console.ForegroundColor = ConsoleColor.DarkGray;
+                            TryWriteConsole(string.Format(
                                 string.Format(" Min÷Max: {1:0.00} ÷ {2:0.00}, Time: {3}m{4:00}s",
                                 unit,
                                 e.Results.Min,
                                 e.Results.Max,
                                 e.ElapsedMs / 1000 / 60,
-                                e.ElapsedMs / 1000 % 60)
+                                e.ElapsedMs / 1000 % 60))
                             );
-                            Console.ResetColor();
+                            //Console.ResetColor();
                         }
 
-                        if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Escape)
+                        /*if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Escape)
                         {
                             base.WriteMessage("  Stopping...");
                             breakTest = true;
                             testSuite.Break();
-                        }
+                        }*/
 
-                        ShowCounters(testSuite);
+                        try
+                        {
+                            ShowCounters(testSuite);
+                        }
+                        catch (Exception ex)
+                        {
+                            //TODO: IMPLEMENTAR EXCEPTION
+                            System.Diagnostics.Debugger.Log(0, "", ex.ToString());
+
+
+                        }
+                        
                     };
 
                     var results = testSuite.Execute();
@@ -310,9 +336,17 @@ namespace NetHardwareBench.Module.LocalStorage
 
         private void ClearLine(int cursorLeft)
         {
-            Console.CursorLeft = cursorLeft;
-            Console.Write(new string(' ', Console.WindowWidth - cursorLeft - 1));
-            Console.CursorLeft = cursorLeft;
+            try
+            {
+                Console.CursorLeft = cursorLeft;
+                TryWriteConsole(string.Format(new string(' ', Console.WindowWidth - cursorLeft - 1)));
+                Console.CursorLeft = cursorLeft;
+            }
+            catch (Exception ex)
+            {
+                //TODO: IMPLEMENTAR EXCEPTION
+            }
+            
         }
 
         char[] anim = new char[] { '/', '|', '\\', '-', '/', '|', '\\', '-' };
@@ -338,12 +372,12 @@ namespace NetHardwareBench.Module.LocalStorage
                 var elapsed = string.Format("                          Elapsed: {0:00}m {1:00}s", elapsedSecs / 60, elapsedSecs % 60);
                 Console.CursorLeft = Console.WindowWidth - elapsed.Length - 1;
                 Console.CursorTop = 0;
-                Console.Write(elapsed);
+                TryWriteConsole(string.Format(elapsed));
 
                 var remaing = string.Format("                          Remaining: {0:00}m {1:00}s", ts.RemainingMs / 1000 / 60, ts.RemainingMs / 1000 % 60);
                 Console.CursorLeft = Console.WindowWidth - remaing.Length - 1;
                 Console.CursorTop = 1;
-                Console.Write(remaing);
+                TryWriteConsole(string.Format(remaing));
 
                 prevElapsedSecs = elapsedSecs;
             }
@@ -358,28 +392,36 @@ namespace NetHardwareBench.Module.LocalStorage
             string[] lines = text
                 .Replace("\t", new String(' ', tabSize))
                 .Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-
-            for (int i = 0; i < lines.Length; i++)
+            try
             {
-                string process = lines[i];
-                List<String> wrapped = new List<string>();
-
-                while (process.Length > Console.WindowWidth)
+                for (int i = 0; i < lines.Length; i++)
                 {
-                    int wrapAt = process.LastIndexOf(' ', Math.Min(Console.WindowWidth - 1, process.Length));
-                    if (wrapAt <= 0) break;
+                    string process = lines[i];
+                    List<String> wrapped = new List<string>();
 
-                    wrapped.Add(process.Substring(0, wrapAt));
-                    process = process.Remove(0, wrapAt + 1);
+                    while (process.Length > Console.WindowWidth)
+                    {
+                        int wrapAt = process.LastIndexOf(' ', Math.Min(Console.WindowWidth - 1, process.Length));
+                        if (wrapAt <= 0) break;
+
+                        wrapped.Add(process.Substring(0, wrapAt));
+                        process = process.Remove(0, wrapAt + 1);
+                    }
+
+                    foreach (string wrap in wrapped)
+                    {
+                        base.WriteMessage(wrap);
+                    }
+
+                    base.WriteMessage(process);
                 }
-
-                foreach (string wrap in wrapped)
-                {
-                    base.WriteMessage(wrap);
-                }
-
-                base.WriteMessage(process);
             }
+            catch (Exception)
+            {
+
+                //TODO: FIX CONSOLE EXCPETION ON FORMS
+            }
+            
         }
 
 

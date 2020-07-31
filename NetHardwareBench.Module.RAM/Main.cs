@@ -40,10 +40,6 @@ namespace NetHardwareBench.Module.RAM
         }
 
 
-
-
-
-
         public Int64 RAMTotal;
         public Int64 RAMFree;
 
@@ -113,7 +109,7 @@ namespace NetHardwareBench.Module.RAM
         {
             testRunning = true;
             abortTest = false;
-            long MegabytesToTest = 1500;
+            long MegabytesToTest = 1000;
             List<BenchmarkPartialResult> result = new List<BenchmarkPartialResult>();
 
             Int64[] ramInfo = getRAMinfo();
@@ -122,7 +118,7 @@ namespace NetHardwareBench.Module.RAM
             System.IO.MemoryStream mem = new System.IO.MemoryStream();
 
 
-            const int BUFFER_SIZE = 30000;
+            const int BUFFER_SIZE = 1024; //30000;
 
             //MegabytesToTest = Convert.ToInt32((RAMFree / 1024 ) /1024 );
             long MaximumMemoryToTest = Convert.ToInt64(MegabytesToTest * 1048576);

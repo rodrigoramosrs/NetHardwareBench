@@ -29,8 +29,11 @@ namespace NetHardwareBench.App.Forms
 
             this.lblInternetDescription.Text = Hardware.HardwareInfo.GetNetworDescription();
             this.lblNetworkDescription.Text = Hardware.HardwareInfo.GetNetworDescription();
-
+            this.lblNetworkDescription.SelectionStart = 0;
+            this.lblInternetDescription.SelectionLength = 0;
+            pnlBenchmarkButton.Focus();
             ShowHidePictureResult(false);
+
         }
 
         private void ShowHidePictureResult(bool Show)
@@ -130,7 +133,7 @@ namespace NetHardwareBench.App.Forms
                         BenchmarkType.CPU,
                         BenchmarkType.NETWORK,
                         BenchmarkType.INTERNET,
-                        BenchmarkType.GPU,
+                        //BenchmarkType.GPU,
                         BenchmarkType.LOCAL_STORAGE);
 
                 StringBuilder builder = new StringBuilder();
@@ -216,11 +219,9 @@ namespace NetHardwareBench.App.Forms
         private void frmMain_Shown(object sender, EventArgs e)
         {
             
-
             this.lblInternetDescription.SelectionLength = 0;
             this.lblNetworkDescription.SelectionLength = 0;
-            
-            this.pnlBenchmarkButton.Select();
+            this.Focus();
         }
 
         private void lblFechar_Click(object sender, EventArgs e)

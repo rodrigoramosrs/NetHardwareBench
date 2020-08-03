@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>main.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -90,6 +93,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\GIF\loading.gif" />
+    <Content Include="Assets\Ico\main.ico" />
+    <Content Include="main.ico" />
     <None Include="Assets\Icons\icons8-about-48.png" />
     <Content Include="Assets\Icons\icons8-audio-cable-96.png" />
     <Content Include="Assets\Icons\icons8-box-important-48.png" />

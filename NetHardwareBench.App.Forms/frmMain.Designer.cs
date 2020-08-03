@@ -28,77 +28,78 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pbCPUResult = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.lblCPUDescription = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.lblFechar = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.pictureBox10 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pbRamResult = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.lblRamDescription = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.pbHDDResult = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.lblHardDiskDiscription = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.pbNetworkResult = new System.Windows.Forms.PictureBox();
+            this.lblNetworkDescription = new System.Windows.Forms.TextBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.pbInternetResult = new System.Windows.Forms.PictureBox();
+            this.lblInternetDescription = new System.Windows.Forms.TextBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.label11 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.pbGPUResult = new System.Windows.Forms.PictureBox();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.lblGPUDescription = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.pnlBenchmarkButton = new System.Windows.Forms.Panel();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.pnlLoading = new System.Windows.Forms.Panel();
+            this.pbBenchmarkProgress = new System.Windows.Forms.ProgressBar();
             this.lblProgressDescription = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.bwBenchmark = new System.ComponentModel.BackgroundWorker();
-            this.pbBenchmarkProgress = new System.Windows.Forms.ProgressBar();
-            this.lblNetworkDescription = new System.Windows.Forms.TextBox();
-            this.lblInternetDescription = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox10 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pbCPUResult = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pbRamResult = new System.Windows.Forms.PictureBox();
-            this.pbHDDResult = new System.Windows.Forms.PictureBox();
-            this.pbNetworkResult = new System.Windows.Forms.PictureBox();
-            this.pbGPUResult = new System.Windows.Forms.PictureBox();
-            this.pbInternetResult = new System.Windows.Forms.PictureBox();
+            this.bwBenchmark = new System.ComponentModel.BackgroundWorker();
             this.pnlDefault = new System.Windows.Forms.Panel();
-            this.lblFechar = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel6.SuspendLayout();
-            this.panel7.SuspendLayout();
-            this.pnlBenchmarkButton.SuspendLayout();
-            this.pnlLoading.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCPUResult)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbRamResult)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbHDDResult)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbNetworkResult)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbGPUResult)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbInternetResult)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            this.panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbGPUResult)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            this.pnlBenchmarkButton.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            this.pnlLoading.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -112,6 +113,26 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(384, 61);
             this.panel1.TabIndex = 1;
+            // 
+            // pbCPUResult
+            // 
+            this.pbCPUResult.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_minus_48;
+            this.pbCPUResult.Location = new System.Drawing.Point(349, 3);
+            this.pbCPUResult.Name = "pbCPUResult";
+            this.pbCPUResult.Size = new System.Drawing.Size(32, 32);
+            this.pbCPUResult.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbCPUResult.TabIndex = 6;
+            this.pbCPUResult.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_processor_96;
+            this.pictureBox2.Location = new System.Drawing.Point(4, 6);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(48, 48);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 5;
+            this.pictureBox2.TabStop = false;
             // 
             // lblCPUDescription
             // 
@@ -151,6 +172,51 @@
             this.panel5.TabIndex = 2;
             this.panel5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             // 
+            // lblFechar
+            // 
+            this.lblFechar.AutoSize = true;
+            this.lblFechar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblFechar.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
+            this.lblFechar.ForeColor = System.Drawing.Color.White;
+            this.lblFechar.Location = new System.Drawing.Point(381, -1);
+            this.lblFechar.Name = "lblFechar";
+            this.lblFechar.Size = new System.Drawing.Size(27, 30);
+            this.lblFechar.TabIndex = 8;
+            this.lblFechar.Text = "X";
+            this.lblFechar.Click += new System.EventHandler(this.lblFechar_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(128, 78);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(254, 21);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Simple Benchmark for everyday";
+            // 
+            // pictureBox10
+            // 
+            this.pictureBox10.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox10.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_about_48;
+            this.pictureBox10.Location = new System.Drawing.Point(339, -1);
+            this.pictureBox10.Name = "pictureBox10";
+            this.pictureBox10.Size = new System.Drawing.Size(36, 36);
+            this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox10.TabIndex = 6;
+            this.pictureBox10.TabStop = false;
+            this.pictureBox10.Click += new System.EventHandler(this.pictureBox10_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_workstation_96;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(91, 102);
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -173,6 +239,26 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(384, 61);
             this.panel2.TabIndex = 6;
+            // 
+            // pbRamResult
+            // 
+            this.pbRamResult.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_minus_48;
+            this.pbRamResult.Location = new System.Drawing.Point(349, 3);
+            this.pbRamResult.Name = "pbRamResult";
+            this.pbRamResult.Size = new System.Drawing.Size(32, 32);
+            this.pbRamResult.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbRamResult.TabIndex = 7;
+            this.pbRamResult.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_memory_slot_96;
+            this.pictureBox3.Location = new System.Drawing.Point(4, 6);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(48, 48);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 5;
+            this.pictureBox3.TabStop = false;
             // 
             // lblRamDescription
             // 
@@ -208,6 +294,26 @@
             this.panel3.Size = new System.Drawing.Size(384, 61);
             this.panel3.TabIndex = 7;
             // 
+            // pbHDDResult
+            // 
+            this.pbHDDResult.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_minus_48;
+            this.pbHDDResult.Location = new System.Drawing.Point(349, 3);
+            this.pbHDDResult.Name = "pbHDDResult";
+            this.pbHDDResult.Size = new System.Drawing.Size(32, 32);
+            this.pbHDDResult.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbHDDResult.TabIndex = 8;
+            this.pbHDDResult.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_hdd_96;
+            this.pictureBox4.Location = new System.Drawing.Point(4, 6);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(48, 48);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 5;
+            this.pictureBox4.TabStop = false;
+            // 
             // lblHardDiskDiscription
             // 
             this.lblHardDiskDiscription.AutoSize = true;
@@ -242,6 +348,43 @@
             this.panel4.Size = new System.Drawing.Size(384, 61);
             this.panel4.TabIndex = 8;
             // 
+            // pbNetworkResult
+            // 
+            this.pbNetworkResult.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_minus_48;
+            this.pbNetworkResult.Location = new System.Drawing.Point(349, 3);
+            this.pbNetworkResult.Name = "pbNetworkResult";
+            this.pbNetworkResult.Size = new System.Drawing.Size(32, 32);
+            this.pbNetworkResult.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbNetworkResult.TabIndex = 9;
+            this.pbNetworkResult.TabStop = false;
+            // 
+            // lblNetworkDescription
+            // 
+            this.lblNetworkDescription.BackColor = System.Drawing.Color.White;
+            this.lblNetworkDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lblNetworkDescription.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.lblNetworkDescription.ForeColor = System.Drawing.Color.Gray;
+            this.lblNetworkDescription.Location = new System.Drawing.Point(58, 34);
+            this.lblNetworkDescription.Multiline = true;
+            this.lblNetworkDescription.Name = "lblNetworkDescription";
+            this.lblNetworkDescription.ReadOnly = true;
+            this.lblNetworkDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.lblNetworkDescription.ShortcutsEnabled = false;
+            this.lblNetworkDescription.Size = new System.Drawing.Size(293, 20);
+            this.lblNetworkDescription.TabIndex = 6;
+            this.lblNetworkDescription.Text = "...";
+            this.lblNetworkDescription.WordWrap = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_network_card_96;
+            this.pictureBox5.Location = new System.Drawing.Point(4, 6);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(48, 48);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.TabIndex = 5;
+            this.pictureBox5.TabStop = false;
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -265,6 +408,43 @@
             this.panel6.Size = new System.Drawing.Size(384, 61);
             this.panel6.TabIndex = 9;
             // 
+            // pbInternetResult
+            // 
+            this.pbInternetResult.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_minus_48;
+            this.pbInternetResult.Location = new System.Drawing.Point(349, 3);
+            this.pbInternetResult.Name = "pbInternetResult";
+            this.pbInternetResult.Size = new System.Drawing.Size(32, 32);
+            this.pbInternetResult.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbInternetResult.TabIndex = 10;
+            this.pbInternetResult.TabStop = false;
+            // 
+            // lblInternetDescription
+            // 
+            this.lblInternetDescription.BackColor = System.Drawing.Color.White;
+            this.lblInternetDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lblInternetDescription.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.lblInternetDescription.ForeColor = System.Drawing.Color.Gray;
+            this.lblInternetDescription.Location = new System.Drawing.Point(58, 32);
+            this.lblInternetDescription.Multiline = true;
+            this.lblInternetDescription.Name = "lblInternetDescription";
+            this.lblInternetDescription.ReadOnly = true;
+            this.lblInternetDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.lblInternetDescription.ShortcutsEnabled = false;
+            this.lblInternetDescription.Size = new System.Drawing.Size(293, 20);
+            this.lblInternetDescription.TabIndex = 7;
+            this.lblInternetDescription.Text = "...";
+            this.lblInternetDescription.WordWrap = false;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_cisco_router_96;
+            this.pictureBox6.Location = new System.Drawing.Point(4, 6);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(48, 48);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox6.TabIndex = 5;
+            this.pictureBox6.TabStop = false;
+            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -287,6 +467,26 @@
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(384, 61);
             this.panel7.TabIndex = 10;
+            // 
+            // pbGPUResult
+            // 
+            this.pbGPUResult.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_minus_48;
+            this.pbGPUResult.Location = new System.Drawing.Point(349, 3);
+            this.pbGPUResult.Name = "pbGPUResult";
+            this.pbGPUResult.Size = new System.Drawing.Size(32, 32);
+            this.pbGPUResult.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbGPUResult.TabIndex = 10;
+            this.pbGPUResult.TabStop = false;
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_video_card_96;
+            this.pictureBox7.Location = new System.Drawing.Point(4, 6);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(48, 48);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox7.TabIndex = 5;
+            this.pictureBox7.TabStop = false;
             // 
             // lblGPUDescription
             // 
@@ -335,6 +535,16 @@
             this.pnlBenchmarkButton.TabIndex = 13;
             this.pnlBenchmarkButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlBenchmarkButton_MouseClick);
             // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_motherboard_96;
+            this.pictureBox9.Location = new System.Drawing.Point(2, 3);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(48, 48);
+            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox9.TabIndex = 6;
+            this.pictureBox9.TabStop = false;
+            // 
             // pnlLoading
             // 
             this.pnlLoading.BackColor = System.Drawing.Color.White;
@@ -348,6 +558,14 @@
             this.pnlLoading.Size = new System.Drawing.Size(293, 107);
             this.pnlLoading.TabIndex = 14;
             this.pnlLoading.Visible = false;
+            // 
+            // pbBenchmarkProgress
+            // 
+            this.pbBenchmarkProgress.Location = new System.Drawing.Point(107, 91);
+            this.pbBenchmarkProgress.Name = "pbBenchmarkProgress";
+            this.pbBenchmarkProgress.Size = new System.Drawing.Size(181, 10);
+            this.pbBenchmarkProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.pbBenchmarkProgress.TabIndex = 7;
             // 
             // lblProgressDescription
             // 
@@ -371,65 +589,6 @@
             this.label14.TabIndex = 6;
             this.label14.Text = "Benchmarking ...";
             // 
-            // bwBenchmark
-            // 
-            this.bwBenchmark.WorkerReportsProgress = true;
-            this.bwBenchmark.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwBenchmark_DoWork);
-            this.bwBenchmark.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwBenchmark_RunWorkerCompleted);
-            // 
-            // pbBenchmarkProgress
-            // 
-            this.pbBenchmarkProgress.Location = new System.Drawing.Point(107, 91);
-            this.pbBenchmarkProgress.Name = "pbBenchmarkProgress";
-            this.pbBenchmarkProgress.Size = new System.Drawing.Size(181, 10);
-            this.pbBenchmarkProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.pbBenchmarkProgress.TabIndex = 7;
-            // 
-            // lblNetworkDescription
-            // 
-            this.lblNetworkDescription.BackColor = System.Drawing.Color.White;
-            this.lblNetworkDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lblNetworkDescription.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblNetworkDescription.ForeColor = System.Drawing.Color.Gray;
-            this.lblNetworkDescription.Location = new System.Drawing.Point(58, 34);
-            this.lblNetworkDescription.Multiline = true;
-            this.lblNetworkDescription.Name = "lblNetworkDescription";
-            this.lblNetworkDescription.ReadOnly = true;
-            this.lblNetworkDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.lblNetworkDescription.ShortcutsEnabled = false;
-            this.lblNetworkDescription.Size = new System.Drawing.Size(293, 20);
-            this.lblNetworkDescription.TabIndex = 6;
-            this.lblNetworkDescription.Text = "...";
-            this.lblNetworkDescription.WordWrap = false;
-            // 
-            // lblInternetDescription
-            // 
-            this.lblInternetDescription.BackColor = System.Drawing.Color.White;
-            this.lblInternetDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lblInternetDescription.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblInternetDescription.ForeColor = System.Drawing.Color.Gray;
-            this.lblInternetDescription.Location = new System.Drawing.Point(58, 32);
-            this.lblInternetDescription.Multiline = true;
-            this.lblInternetDescription.Name = "lblInternetDescription";
-            this.lblInternetDescription.ReadOnly = true;
-            this.lblInternetDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.lblInternetDescription.ShortcutsEnabled = false;
-            this.lblInternetDescription.Size = new System.Drawing.Size(293, 20);
-            this.lblInternetDescription.TabIndex = 7;
-            this.lblInternetDescription.Text = "...";
-            this.lblInternetDescription.WordWrap = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(128, 78);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(254, 21);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Simple Benchmark for everyday";
-            // 
             // pictureBox8
             // 
             this.pictureBox8.Image = global::NetHardwareBench.App.Forms.Properties.Resources.loading;
@@ -440,156 +599,11 @@
             this.pictureBox8.TabIndex = 4;
             this.pictureBox8.TabStop = false;
             // 
-            // pictureBox9
+            // bwBenchmark
             // 
-            this.pictureBox9.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_motherboard_96;
-            this.pictureBox9.Location = new System.Drawing.Point(2, 3);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(48, 48);
-            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox9.TabIndex = 6;
-            this.pictureBox9.TabStop = false;
-            // 
-            // pictureBox7
-            // 
-            this.pictureBox7.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_video_card_96;
-            this.pictureBox7.Location = new System.Drawing.Point(4, 6);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(48, 48);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox7.TabIndex = 5;
-            this.pictureBox7.TabStop = false;
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_cisco_router_96;
-            this.pictureBox6.Location = new System.Drawing.Point(4, 6);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(48, 48);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox6.TabIndex = 5;
-            this.pictureBox6.TabStop = false;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_network_card_96;
-            this.pictureBox5.Location = new System.Drawing.Point(4, 6);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(48, 48);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 5;
-            this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_hdd_96;
-            this.pictureBox4.Location = new System.Drawing.Point(4, 6);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(48, 48);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 5;
-            this.pictureBox4.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_memory_slot_96;
-            this.pictureBox3.Location = new System.Drawing.Point(4, 6);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(48, 48);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 5;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox10
-            // 
-            this.pictureBox10.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox10.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_about_48;
-            this.pictureBox10.Location = new System.Drawing.Point(339, -1);
-            this.pictureBox10.Name = "pictureBox10";
-            this.pictureBox10.Size = new System.Drawing.Size(36, 36);
-            this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox10.TabIndex = 6;
-            this.pictureBox10.TabStop = false;
-            this.pictureBox10.Click += new System.EventHandler(this.pictureBox10_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_workstation_96;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(91, 102);
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pbCPUResult
-            // 
-            this.pbCPUResult.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_minus_48;
-            this.pbCPUResult.Location = new System.Drawing.Point(349, 3);
-            this.pbCPUResult.Name = "pbCPUResult";
-            this.pbCPUResult.Size = new System.Drawing.Size(32, 32);
-            this.pbCPUResult.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbCPUResult.TabIndex = 6;
-            this.pbCPUResult.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_processor_96;
-            this.pictureBox2.Location = new System.Drawing.Point(4, 6);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(48, 48);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 5;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pbRamResult
-            // 
-            this.pbRamResult.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_minus_48;
-            this.pbRamResult.Location = new System.Drawing.Point(349, 3);
-            this.pbRamResult.Name = "pbRamResult";
-            this.pbRamResult.Size = new System.Drawing.Size(32, 32);
-            this.pbRamResult.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbRamResult.TabIndex = 7;
-            this.pbRamResult.TabStop = false;
-            // 
-            // pbHDDResult
-            // 
-            this.pbHDDResult.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_minus_48;
-            this.pbHDDResult.Location = new System.Drawing.Point(349, 3);
-            this.pbHDDResult.Name = "pbHDDResult";
-            this.pbHDDResult.Size = new System.Drawing.Size(32, 32);
-            this.pbHDDResult.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbHDDResult.TabIndex = 8;
-            this.pbHDDResult.TabStop = false;
-            // 
-            // pbNetworkResult
-            // 
-            this.pbNetworkResult.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_minus_48;
-            this.pbNetworkResult.Location = new System.Drawing.Point(349, 3);
-            this.pbNetworkResult.Name = "pbNetworkResult";
-            this.pbNetworkResult.Size = new System.Drawing.Size(32, 32);
-            this.pbNetworkResult.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbNetworkResult.TabIndex = 9;
-            this.pbNetworkResult.TabStop = false;
-            // 
-            // pbGPUResult
-            // 
-            this.pbGPUResult.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_minus_48;
-            this.pbGPUResult.Location = new System.Drawing.Point(349, 3);
-            this.pbGPUResult.Name = "pbGPUResult";
-            this.pbGPUResult.Size = new System.Drawing.Size(32, 32);
-            this.pbGPUResult.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbGPUResult.TabIndex = 10;
-            this.pbGPUResult.TabStop = false;
-            // 
-            // pbInternetResult
-            // 
-            this.pbInternetResult.Image = global::NetHardwareBench.App.Forms.Properties.Resources.icons8_minus_48;
-            this.pbInternetResult.Location = new System.Drawing.Point(349, 3);
-            this.pbInternetResult.Name = "pbInternetResult";
-            this.pbInternetResult.Size = new System.Drawing.Size(32, 32);
-            this.pbInternetResult.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbInternetResult.TabIndex = 10;
-            this.pbInternetResult.TabStop = false;
+            this.bwBenchmark.WorkerReportsProgress = true;
+            this.bwBenchmark.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwBenchmark_DoWork);
+            this.bwBenchmark.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwBenchmark_RunWorkerCompleted);
             // 
             // pnlDefault
             // 
@@ -599,19 +613,6 @@
             this.pnlDefault.Name = "pnlDefault";
             this.pnlDefault.Size = new System.Drawing.Size(409, 622);
             this.pnlDefault.TabIndex = 15;
-            // 
-            // lblFechar
-            // 
-            this.lblFechar.AutoSize = true;
-            this.lblFechar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblFechar.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
-            this.lblFechar.ForeColor = System.Drawing.Color.White;
-            this.lblFechar.Location = new System.Drawing.Point(381, -1);
-            this.lblFechar.Name = "lblFechar";
-            this.lblFechar.Size = new System.Drawing.Size(27, 30);
-            this.lblFechar.TabIndex = 8;
-            this.lblFechar.Text = "X";
-            this.lblFechar.Click += new System.EventHandler(this.lblFechar_Click);
             // 
             // frmMain
             // 
@@ -632,6 +633,7 @@
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
@@ -641,38 +643,38 @@
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCPUResult)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRamResult)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbHDDResult)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbNetworkResult)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbInternetResult)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbGPUResult)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             this.pnlBenchmarkButton.ResumeLayout(false);
             this.pnlBenchmarkButton.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             this.pnlLoading.ResumeLayout(false);
             this.pnlLoading.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCPUResult)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbRamResult)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbHDDResult)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbNetworkResult)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbGPUResult)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbInternetResult)).EndInit();
             this.ResumeLayout(false);
 
         }

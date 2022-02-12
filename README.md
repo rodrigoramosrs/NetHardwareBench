@@ -1,5 +1,3 @@
-# 
-
 <h1 align=center><code>NetHardwareBench</code></h1>
 <p align=center>
   <img src="assets/printscreen.png"/>
@@ -17,7 +15,14 @@ Benchmark your computer performance using .net/core
 - Made in .NET Core / Standard (why not)? =)
 - Open source... Like? use without moderation hahaha
 
-## Sample Output
+## Sample
+
+- If you are running on windows, follow this path:
+    - .\src\NetHardwareBench.App.Forms\NetHardwareBench.App.Forms.csproj (forms)
+    - .\src\NetHardwareBench.App\NetHardwareBench.App.csproj (console)
+
+- if you are in Linux / Mac / Raspberry / Calculator (maybe), look this sample:
+    - .\src\NetHardwareBench.Core.App\NetHardwareBench.Core.App.csproj (console)
 
 All output from sample apps where saved in the same application directory, using this template name 'benchmark_result_{?}.json'.
 
@@ -401,28 +406,14 @@ Lest see the sample data for each output.
 ]
 ```
 
-- Linux / Mac
-
-```console
-$ fileleaks -p {path}
-```
-
 You just need to inform the path to scan.
-
-## Next steps
-
-- Enhance paralelism on scan
-- Improve result accurracy
-- More parameters...
 
 ## Credits
 
-Creators:
+Creator:
 
 - [ME](https://github.com/rodrigoramosrs)
-- [Edivan Galindo](https://github.com/edivangalindo)
 
 inspiration:
 
-- [gitleaks](https://github.com/zricethezav/gitleaks)
-- [trufflehog](https://github.com/trufflesecurity/truffleHog)
+- some other opensource projects built with .net core

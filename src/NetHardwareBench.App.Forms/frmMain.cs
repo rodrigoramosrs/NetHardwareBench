@@ -194,10 +194,10 @@ namespace NetHardwareBench.App.Forms
                 }
 
                 string JSONResult = JsonConvert.SerializeObject(benchmarkResult, Formatting.Indented);
-                File.WriteAllText(Environment.CurrentDirectory + "\\benchmark_result_resumed.json", builder.ToString());
+                File.WriteAllText(Environment.CurrentDirectory + "\\benchmark_result_summarized.json", builder.ToString());
                 File.WriteAllText(Environment.CurrentDirectory + "\\benchmark_result_detailed.json", JSONResult);
                 
-                System.Diagnostics.Process.Start(Environment.CurrentDirectory + "\\benchmark_result_resumed.json");
+                System.Diagnostics.Process.Start(Environment.CurrentDirectory + "\\benchmark_result_summarized.json");
             }
             catch (Exception ex)
             {

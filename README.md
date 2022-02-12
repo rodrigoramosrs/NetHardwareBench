@@ -406,8 +406,6 @@ Lest see the sample data for each output.
 ]
 ```
 
-You just need to inform the path to scan.
-
 ## Credits
 
 Creator:

@@ -80,6 +80,8 @@ namespace NetHardwareBench.App.Forms
         {
             if (start)
             {
+                lblProgressDescription.Text = $"0 %";
+                this.pbBenchmarkProgress.Value = 0;
                 pnlBenchmarkButton.Enabled = false;
                 ShowHidePictureResult(false);
                 this.pnlLoading.Show();
